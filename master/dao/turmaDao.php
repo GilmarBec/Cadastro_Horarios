@@ -130,7 +130,7 @@
     function searchById($id){
       try{
         $array = array('id'=>$id);
-        $sql = 'SELECT nome FROM turma WHERE id=:id';
+        $sql = 'SELECT * FROM turma WHERE id=:id';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
@@ -139,7 +139,7 @@
           $linha = $row;
         }
         
-        return $linha['nome'];
+        return $linha;
       } catch(PDOException $e) {
         return null;
       }

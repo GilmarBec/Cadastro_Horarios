@@ -17,9 +17,8 @@
   $alterarDao = new AlterarDao($conexao);
   
   $atual = $alterarDao->select();
-  echo '<script>var atual = null;</script>';
-  echo '<script>atual = "'.$atual["alteracao"].'";</script>';
-
+  echo '<script>var atual = "'.$atual["alteracao"].'"</script>';
+  
   $horarioDao = new HorarioDao($conexao);
   $professorDao = new ProfessorDao($conexao);
   $registroDao = new RegistroDao($conexao);
@@ -58,7 +57,8 @@
   
   $horarios = null;
   $i = 0;
-  if(is_array($registros)) {
+  
+  if($registros != null) {
     foreach($registros as $registro) {
       $horario = $horarioDao->searchByIdAndTurno($registro['idHorario'], $turno);
       if($horario != null && $horario != false) {
@@ -67,8 +67,8 @@
       }
     }
   }
-
-  if(is_array($horarios)) {
+  
+  if($horarios != null) {
     $idTipos;
     $i = 0;
     foreach($horarios as $horario) {
@@ -76,7 +76,7 @@
       $i++;
     }
     
-    $tipos = null;
+    $tipos;
     $i = 0;
     foreach($idTipos as $id) {
       $tipos[$i] = $tipoDao->searchById($id);
@@ -87,23 +87,23 @@
     switch(count($tipos)) {
       case 1:
         $classeBox = " box-full";
-        $classeCol = "col m12";
-        $limit = 12;
+        $classeCol = "col-md-12";
+        $limit = 16;
         break;
       case 2:
         $classeBox = " box-full";
-        $classeCol = "col m6";
-        $limit = 12;
+        $classeCol = "col-md-6";
+        $limit = 16;
         break;
       case 3:
         $classeBox = " box-middle";
-        $classeCol = "col m6";
-        $limit = 5;
+        $classeCol = "col-md-6";
+        $limit = 7;
         break;
       case 4:
         $classeBox = " box-middle";
-        $classeCol = "col m6";
-        $limit = 5;
+        $classeCol = "col-md-6";
+        $limit = 7;
         break;
     }
   }
@@ -115,10 +115,8 @@
   <title>Horários Senai-SJ</title>
   <?php ativarHead(); ?>
   <link rel="stylesheet" href="css/horarios.css">
-  <link rel="stylesheet" href="css/materialize.css">
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css">
-  <script src="js/materialize.js"></script>
   <script src="js/slick.js"></script>
   
   <style>
@@ -153,10 +151,10 @@
 </head>
 
 <body>
-  <div class="container fluid container-horarios">
+  <div class="container-fluid container-horarios">
     <div class="row">
     <?php
-      if(is_array($horarios)) {
+      if($horarios != null) {
         $i = 0;
         $slick = 0;
         foreach ($tipos as $tipo) {
@@ -164,14 +162,14 @@
           if(count($tipos) == 3) {
             $i++;
             if($i == 3) {
-              $classeCol = " col s12";
+              $classeCol = " col-md-12";
             }
           }
           echo '
             <div class="' . $classeCol . '">
               <div class="box box-info' . $classeBox . '">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><span class="label label-primary">' . $tipo . '</span></h3>
+                  <h1 class="box-title"><span class="label label-warning">' . $tipo . '</span></h1>
                 </div>
                 <div id="slick'.$slick.'">
                   <div class="box-body">
@@ -179,9 +177,9 @@
                       <table class="table no-margin">
                         <thead>
                           <tr>
-                            <th><span class="label label-info">Turma</span></th>
-                            <th><span class="label label-info">Professor</span></th>
-                            <th><span class="label label-info">Sala</span></th>
+                            <th class="col-md-6"><span class="label label-info">Turma</span></th>
+                            <th class="col-md-4"><span class="label label-info">Professor</span></th>
+                            <th class="col-md-2"><span class="label label-info">Sala</span></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -190,7 +188,7 @@
                           foreach($horarios as $horario) {
                             if($tipoDao->searchById($horario['idTipo']) == $tipo) {
                               $contador++;
-                              $turma = $turmaDao->searchById($horario['idTurma']);
+                              $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
                               $prof = $professorDao->searchById($horario['idProfessor']);
                               $sala = $salaDao->searchById($horario['idSala']);
                               echo '<tr role="row">';
@@ -208,12 +206,12 @@
                     </div>
                     <div class="box-body">
                       <div class="table-responsive">
-                        <table class="striped">
+                        <table class="table no-margin">
                           <thead>
                             <tr>
-                              <th><span class="label label-info">Turma</span></th>
-                              <th><span class="label label-info">Professor</span></th>
-                              <th><span class="label label-info">Sala</span></th>
+                              <th class="col-md-6"><span class="label label-info">Turma</span></th>
+                              <th class="col-md-4"><span class="label label-info">Professor</span></th>
+                              <th class="col-md-2"><span class="label label-info">Sala</span></th>
                             </tr>
                           </thead>
                           <tbody>';
@@ -241,9 +239,9 @@
           ';
         }
       }
-      if(!is_array($horarios)){
+      if($horarios == null) {
         echo '
-          <div class="col m12">
+          <div class="col-md-12">
             <div class="box box-info box-full">
               <div class="box-header" style="text-align: center;">
                 <h1 class="box-title label label-warning" style="margin-top: 40vh;">Sem horários cadastrados!</h1>
@@ -260,7 +258,6 @@
 <?php echo '<script>atualizar('.$ms.');</script>';?>
 
 <script>
-  
   var atualizado = atual;
   var source = new EventSource("sse/sseControl.php");
   source.onmessage = function(event){
@@ -269,5 +266,4 @@
       window.location.reload();
     }
   }
-
 </script>

@@ -33,6 +33,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/sse/sseUpdate.php">Update</a></li>
             <li<?php if($pageAtual == "login") echo ' class="active"'; if($logado) echo ' style=" display: none;"';?>><a href="/master/login.php">Login</a></li>
             <li<?php if(!$logado) echo' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>
           </ul>

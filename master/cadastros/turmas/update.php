@@ -1,8 +1,15 @@
 <?php
   include_once('../../lib/head.php');
-  
+  include_once('../../lib/conexao.php');
+  include_once('../../dao/turmaDao.php');
+
+  $conexao = new Conexao();
+  $turmaDao = new TurmaDao($conexao);
+
   $id = null;
   $id = $_GET['id'];
+
+  $search = $turmaDao->searchById($id);
   
   if(ISSET($_GET['r'])) {
     $r = $_GET['r'];
@@ -64,4 +71,11 @@
 
 </html>
 
-<script>document.getElementById('inputNome').focus();</script>
+<script>
+  <?php
+    echo 'var nome = "'.$search['nome'].'";';
+    echo 'var turno = "'.$search['turno'].'";';
+  ?>
+  $("#inputNome").val(nome);
+  $("#inputTurno").val(turno);
+</script>

@@ -67,7 +67,7 @@
                     <?php
                       if($result != false && $erro == false) {
                         if($unico) {
-                          $turma = $turmaDao->searchById($result['idTurma']);
+                          $turma = $turmaDao->searchById($result['idTurma'])['nome'];
                           $prof = $professorDao->searchById($result['idProfessor']);
                           $sala = searchSala($result['idSala']);
                           $tipo = searchTipo($result['idTipo']);
@@ -83,7 +83,7 @@
                           echo '</tr>';
                         } else {
                           foreach($result as $row) {
-                            $turma = $turmaDao->searchById($row['idTurma']);
+                            $turma = $turmaDao->searchById($row['idTurma'])['nome'];
                             $prof = $professorDao->searchById($row['idProfessor']);
                             $sala = $salaDao->searchById($row['idSala']);
                             $tipo = $tipoDao->searchById($row['idTipo']);
