@@ -29,17 +29,19 @@
   $data = date('Y-m-d');
 
   $registros = $registroDao->search($data);
-
+  
   $i = 0;
   $result  = null;
-  if(ISSET($_GET['turno']) && $result != null) {
+  if(ISSET($_GET['turno']) && $registros != false) {
     foreach ($registros as $registro) {
-      $result[$i] = $horarioDao->searchByIdAndTurno($registro->getIdHorario(), $turno);
-      $i++;
+      if($horarioDao->searchByIdAndTurno($registro['idHorario'], $turno) != false) {
+        $result[$i] = $horarioDao->searchByIdAndTurno($registro['idHorario'], $turno);
+        $i++;
+      }
     }
-  } else if($result != null) {
+  } else if($registros != false) {
     foreach ($registros as $registro) {
-      $result[$i] = $horarioDao->searchById($registro->getIdHorario());
+      $result[$i] = $horarioDao->searchById($registro['idHorario']);
       $i++;
     }
   }
@@ -79,9 +81,9 @@
             </h3>
           </div>
           <div class="col-md-3 col-xs-5">
-            <form method="get">
+            <form action="/master/cadastros/horarios/select.php" method="get">
               <h3 class="box-title">
-                <select class="form-control">
+                <select name="turno" class="form-control">
                   <option>Todos os Turnos</option>
                   <option>Matutino</option>
                   <option>Vespertino</option>
