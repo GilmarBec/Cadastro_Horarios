@@ -1,11 +1,8 @@
 <?php
-  if(ISSET($_GET['turno'])) if($_GET['turno'] != "Todos os Turnos") $turno  = $_GET['turno'];
-
   include_once('../../lib/head.php');
 
   include_once('../../lib/conexao.php');
 
-  include_once('../../dao/registroDao.php');
   include_once('../../dao/horarioDao.php');
   include_once('../../dao/turmaDao.php');
   include_once('../../dao/professorDao.php');
@@ -14,7 +11,6 @@
   
   $conexao = new Conexao();
 
-  $registroDao = new RegistroDao($conexao);
   $horarioDao = new HorarioDao($conexao);
   $turmaDao = new TurmaDao($conexao);
   $professorDao = new ProfessorDao($conexao);
@@ -25,27 +21,10 @@
     echo '<script>alert("Erro: "'.$_GET['erro'].');</script>';
   }
 
-  date_default_timezone_set( 'America/Sao_Paulo' );
-  $data = date('Y-m-d');
+  $result = $horarioDao->select();
 
-  $registros = $registroDao->search($data);
-
-  $i = 0;
-  $result  = null;
-  if(ISSET($_GET['turno']) && $result != null) {
-    foreach ($registros as $registro) {
-      $result[$i] = $horarioDao->searchByIdAndTurno($registro->getIdHorario(), $turno);
-      $i++;
-    }
-  } else if($result != null) {
-    foreach ($registros as $registro) {
-      $result[$i] = $horarioDao->searchById($registro->getIdHorario());
-      $i++;
-    }
-  }
-  
   if(!is_array($result)) {
-    if($result != null) {
+    if($result != false) {
       $erro = true;
     }
   } else {
@@ -71,28 +50,6 @@
               </button>
             </h3>
           </div>
-          <div class="col-md-7 col-xs-4">
-            <h3 class="box-title">
-              <button type="button" onclick="window.location='/master/cadastros/horarios/selectAll.php';" class="btn btn-warning">
-                Todos os Cadastros
-              </button>
-            </h3>
-          </div>
-          <div class="col-md-3 col-xs-5">
-            <form method="get">
-              <h3 class="box-title">
-                <select class="form-control">
-                  <option>Todos os Turnos</option>
-                  <option>Matutino</option>
-                  <option>Vespertino</option>
-                  <option>Noturno</option>
-                </select>
-              </h3>
-              <h3 class="box-title">
-                <button type="submit" class="btn btn-success">Search</button>
-              </h3>
-            </form>
-          </div>
         </div>
         <div class="box-body">
           <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -112,7 +69,7 @@
                   </thead>
                   <tbody>
                     <?php
-                      if($result != null && $erro == false) {
+                      if($result != false && $erro == false) {
                         foreach($result as $row) {
                           $turma = $turmaDao->searchById($row['idTurma'])['nome'];
                           $prof = $professorDao->searchById($row['idProfessor']);
