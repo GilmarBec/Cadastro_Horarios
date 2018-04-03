@@ -21,7 +21,10 @@
   $datas = $_POST['datas'];
   
   $dates = null;
-  if(strlen($datas) > 10) $dates = split(",", $datas);
+  echo "datas: ".$datas;
+  if(strlen($datas) > 10){
+    $dates = explode(",", $datas);
+  }
   else $dates[0] = $datas;
   
   $result = $horarioDao->insert($horario);

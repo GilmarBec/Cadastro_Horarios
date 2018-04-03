@@ -130,17 +130,14 @@
 </html>
 
 <script>
-  setTimeout((function(){atualizarTurmas();}), 1);
   atualizarProfessores();
   atualizarSalas();
   atualizarTipos();
-  $('#turno').on('change', function() {
-		atualizarTurmas();
-	});
-	
-	$('#datepicker').multiDatesPicker({
-  	dateFormat: "yy-mm-dd",
-  	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+  $('#turno').on('change', function(){atualizarTurmas();});
+  
+  $('#datepicker').multiDatesPicker({
+    dateFormat: "yy-mm-dd",
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
     dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
     dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
     monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -159,10 +156,13 @@
   }
   
   $("#turno").val(turno);
-  setTimeout((function(){$("#turma").val(turma);}), 1);
-  $("#professor").val(professor);
-  $("#sala").val(sala);
-  $("#tipo").val(tipo);
+  atualizarTurmas();
+  setTimeout(function(){
+    setTimeout(function(){$("#turma").val(turma);}, 50);
+    $("#professor").val(professor);
+    $("#sala").val(sala);
+    $("#tipo").val(tipo);
+  }, 50);
 </script>
 
 <?php

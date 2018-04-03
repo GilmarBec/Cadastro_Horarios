@@ -1,7 +1,14 @@
 <?php
   include_once('../../lib/head.php');
+  include_once('../../lib/conexao.php');
+  include_once('../../dao/salaDao.php');
   
+  $conexao = new Conexao();
+  $salaDao = new SalaDao($conexao);
+
   $id = $_GET['id'];
+
+  $search = $salaDao->searchById($id);
   
   if(ISSET($_GET['r'])) {
     $r = $_GET['r'];
@@ -52,4 +59,12 @@
 
 </html>
 
-<script>document.getElementById('inputNome').focus();</script>
+<script>
+  document.getElementById('inputNome').focus();
+
+  <?php
+    echo 'var nome = "'.$search['nome'].'";';
+  ?>
+  
+  $("#inputNome").val(nome);
+</script>

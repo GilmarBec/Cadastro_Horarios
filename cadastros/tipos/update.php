@@ -1,8 +1,15 @@
 <?php
   include_once('../../lib/head.php');
+  include_once('../../lib/conexao.php');
+  include_once('../../dao/tipoDao.php');
   
+  $conexao = new Conexao();
+  $tipoDao = new TipoDao($conexao);
+
   $id = $_GET['id'];
-  
+
+  $search = $tipoDao->searchById($id);
+
   if(ISSET($_GET['r'])) {
     $r = $_GET['r'];
     if(ISSET($_GET['erro'])) $erro = $_GET['erro'];
@@ -52,4 +59,12 @@
 
 </html>
 
-<script>document.getElementById('inputNome').focus();</script>
+<script>
+  document.getElementById('inputNome').focus();
+
+  <?php
+    echo 'var nome = "'.$search['nome'].'";';
+  ?>
+  
+  $("#inputNome").val(nome);
+</script>

@@ -60,8 +60,8 @@
     
     public function search($sala){
       try{
-        $nome = "%".$nome."%";
-        $array = array('nome'=>$sala->getNome());
+        $nome = "%".$sala->getNome()."%";
+        $array = array('nome'=>$nome);
         $sql = 'SELECT * FROM sala WHERE nome LIKE :nome ORDER BY nome ASC';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
@@ -138,7 +138,7 @@
           $linha = $row;
         }
         
-        return $linha['nome'];
+        return $linha;
       } catch(PDOException $e) {
         return null;
       }

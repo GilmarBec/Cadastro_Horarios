@@ -1,10 +1,9 @@
 <?php
   function ativarHead() {
     echo '<meta charset="utf-8">';
-    echo '<title>Desafio Senai</title>';
+    echo '<title>Horários Senai</title>';
     echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-    echo '<title>Desafio Senai</title>';
     echo "<!-- CSS's -->";
     echo '<link rel="stylesheet" href="/master/css/jquery-ui.css">';
     echo '<link rel="stylesheet" href="/master/css/jquery-ui.multidatespicker.css">';

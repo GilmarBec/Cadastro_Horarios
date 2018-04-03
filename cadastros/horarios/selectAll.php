@@ -50,6 +50,13 @@
               </button>
             </h3>
           </div>
+          <div class="col-md-7 col-xs-4">
+            <h3 class="box-title">
+              <button type="button" onclick="window.location='/master/cadastros/horarios/select.php';" class="btn btn-warning">
+                Cadastros de Hoje
+              </button>
+            </h3>
+          </div>
         </div>
         <div class="box-body">
           <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -72,9 +79,9 @@
                       if($result != false && $erro == false) {
                         foreach($result as $row) {
                           $turma = $turmaDao->searchById($row['idTurma'])['nome'];
-                          $prof = $professorDao->searchById($row['idProfessor']);
-                          $sala = $salaDao->searchById($row['idSala']);
-                          $tipo = $tipoDao->searchById($row['idTipo']);
+                          $prof = $professorDao->searchById($row['idProfessor'])['nome'];
+                          $sala = $salaDao->searchById($row['idSala'])['nome'];
+                          $tipo = $tipoDao->searchById($row['idTipo'])['nome'];
                           $turno = $row['turno'];
                           echo '<tr role="row">';
                           echo '  <td>'.$turma.'</td>';

@@ -130,7 +130,7 @@
             <div class="col-xs-12">
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><span class="label label-primary">' . $tipo . '</span></h3>
+                  <h3 class="box-title"><span class="label label-primary">' . $tipo['nome'] . '</span></h3>
                 </div>
                 
                 <div class="box-body">
@@ -148,9 +148,9 @@
                         ';
                         foreach($horarios as $horario) {
                           if($tipoDao->searchById($horario['idTipo']) == $tipo) {
-                            $turma = $turmaDao->searchById($horario['idTurma']);
-                            $prof = $professorDao->searchById($horario['idProfessor']);
-                            $sala = $salaDao->searchById($horario['idSala']);
+                            $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
+                            $prof = $professorDao->searchById($horario['idProfessor'])['nome'];
+                            $sala = $salaDao->searchById($horario['idSala'])['nome'];
                             echo '<tr role="row">';
                             echo '  <td>'. $turma .'</td>';
                             echo '  <td>'. $prof .'</td>';

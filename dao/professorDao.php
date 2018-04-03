@@ -139,7 +139,7 @@
         $linha = $row;
       }
       
-      return $linha['nome'];
+      return $linha;
     } catch(PDOException $e) {
       return null;
     }

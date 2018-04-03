@@ -1,5 +1,5 @@
 <?php
-  if(ISSET($_GET['turno'])) if($_GET['turno'] != "Todos os Turnos") $turno  = $_GET['turno'];
+  if(ISSET($_GET['turno'])) if($_GET['turno'] != "0") $turno  = $_GET['turno'];
 
   include_once('../../lib/head.php');
 
@@ -32,7 +32,7 @@
   
   $i = 0;
   $result  = null;
-  if(ISSET($_GET['turno']) && $registros != false) {
+  if(ISSET($turno) && $registros != false) {
     foreach ($registros as $registro) {
       if($horarioDao->searchByIdAndTurno($registro['idHorario'], $turno) != false) {
         $result[$i] = $horarioDao->searchByIdAndTurno($registro['idHorario'], $turno);
@@ -84,7 +84,7 @@
             <form action="/master/cadastros/horarios/select.php" method="get">
               <h3 class="box-title">
                 <select name="turno" class="form-control">
-                  <option>Todos os Turnos</option>
+                  <option value="0">Todos os Turnos</option>
                   <option>Matutino</option>
                   <option>Vespertino</option>
                   <option>Noturno</option>
@@ -117,9 +117,9 @@
                       if($result != null && $erro == false) {
                         foreach($result as $row) {
                           $turma = $turmaDao->searchById($row['idTurma'])['nome'];
-                          $prof = $professorDao->searchById($row['idProfessor']);
-                          $sala = $salaDao->searchById($row['idSala']);
-                          $tipo = $tipoDao->searchById($row['idTipo']);
+                          $prof = $professorDao->searchById($row['idProfessor'])['nome'];
+                          $sala = $salaDao->searchById($row['idSala'])['nome'];
+                          $tipo = $tipoDao->searchById($row['idTipo'])['nome'];
                           $turno = $row['turno'];
                           echo '<tr role="row">';
                           echo '  <td>'.$turma.'</td>';

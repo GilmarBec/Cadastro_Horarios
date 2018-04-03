@@ -72,10 +72,13 @@
 </html>
 
 <script>
+  document.getElementById('inputNome').focus();
+
   <?php
     echo 'var nome = "'.$search['nome'].'";';
-    echo 'var turno = "'.$search['turno'].'";';
+    echo 'var turno = "'.$search['turno'].'";';// retorna o turno
   ?>
   $("#inputNome").val(nome);
+  //não funciona
   $("#inputTurno").val(turno);
 </script>
