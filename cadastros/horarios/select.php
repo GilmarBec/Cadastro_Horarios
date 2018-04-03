@@ -82,17 +82,17 @@
           </div>
           <div class="col-md-3 col-xs-5">
             <form action="/master/cadastros/horarios/select.php" method="get">
-              <h3 class="box-title">
+              <div class="input-group">
                 <select name="turno" class="form-control">
                   <option value="0">Todos os Turnos</option>
                   <option>Matutino</option>
                   <option>Vespertino</option>
                   <option>Noturno</option>
                 </select>
-              </h3>
-              <h3 class="box-title">
-                <button type="submit" class="btn btn-success">Search</button>
-              </h3>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-success">Buscar</button>
+                </span>
+              </div>
             </form>
           </div>
         </div>

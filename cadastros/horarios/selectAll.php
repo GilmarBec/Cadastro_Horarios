@@ -1,8 +1,11 @@
 <?php
+  if($_POST) if($_POST['data'] != "") $data = $_POST['data'];
+
   include_once('../../lib/head.php');
 
   include_once('../../lib/conexao.php');
 
+  include_once('../../dao/registroDao.php');
   include_once('../../dao/horarioDao.php');
   include_once('../../dao/turmaDao.php');
   include_once('../../dao/professorDao.php');
@@ -11,6 +14,7 @@
   
   $conexao = new Conexao();
 
+  $registroDao = new RegistroDao($conexao);
   $horarioDao = new HorarioDao($conexao);
   $turmaDao = new TurmaDao($conexao);
   $professorDao = new ProfessorDao($conexao);
@@ -21,7 +25,23 @@
     echo '<script>alert("Erro: "'.$_GET['erro'].');</script>';
   }
 
-  $result = $horarioDao->select();
+  $result = null;
+  if(ISSET($data)) {
+    $ano= substr($data, 6);
+    $mes= substr($data, 3,-5);
+    $dia= substr($data, 0,-8);
+    $data = $ano."-".$mes."-".$dia;
+    $registros = $registroDao->search($data);
+    if($registros != false) {
+      $i = 0;
+      $horarios = null;
+      foreach ($registros as $registro) {
+        $horarios[$i] = $horarioDao->searchById($registro['idHorario']);
+        $i++;
+      }
+      $result = $horarios;
+    }
+  } else $result = $horarioDao->select();
 
   if(!is_array($result)) {
     if($result != false) {
@@ -36,6 +56,7 @@
 
 <head>
   <?php ativarHead(); ?>
+  <script src="../../js/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -43,20 +64,28 @@
     <div class="row">
       <div class="box box-info box-iframe">
         <div class="box-header with-border">
-          <div class="col-md-2 col-xs-3">
-            <h3 class="box-title">
-              <button type="button" onclick="window.location='/master/cadastros/horarios/insert.php';" class="btn btn-info">
-                Cadastrar Horário
-              </button>
-            </h3>
-          </div>
-          <div class="col-md-7 col-xs-4">
-            <h3 class="box-title">
-              <button type="button" onclick="window.location='/master/cadastros/horarios/select.php';" class="btn btn-warning">
-                Cadastros de Hoje
-              </button>
-            </h3>
-          </div>
+          <form class="form-horizontal" action="/master/cadastros/horarios/selectAll.php" method="POST">
+            <div class="col-md-2 col-xs-3">
+              <h3 class="box-title">
+                <button type="button" onclick="window.location='/master/cadastros/horarios/insert.php';" class="btn btn-info">
+                  Cadastrar Horário
+                </button>
+              </h3>
+            </div>
+            <div class="col-md-7 col-xs-4">
+              <h3 class="box-title">
+                <button type="button" onclick="window.location='/master/cadastros/horarios/select.php';" class="btn btn-warning">
+                  Cadastros de Hoje
+                </button>
+              </h3>
+            </div>
+            <div class="col-md-3 col-xs-5 input-group">
+              <input id="data" class="form-control" maxlength="10" name="data" type="text" placeholder="Data">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-success">Buscar</button>
+              </span>
+            </div>
+          </form>
         </div>
         <div class="box-body">
           <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -109,3 +138,18 @@
 </body>
 
 </html>
+
+<script>
+  $('#data').mask('00/00/0000');
+  $("#data").datepicker({
+    dateFormat: "dd/mm/yy",
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+  });
+
+</script>
