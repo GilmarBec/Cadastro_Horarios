@@ -186,7 +186,7 @@
                           ';
                           $contador = 0;
                           foreach($horarios as $horario) {
-                            if($tipoDao->searchById($horario['idTipo']) == $tipo) {
+                            if($tipoDao->searchById($horario['idTipo'])['nome'] == $tipo) {
                               $contador++;
                               $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
                               $prof = $professorDao->searchById($horario['idProfessor'])['nome'];

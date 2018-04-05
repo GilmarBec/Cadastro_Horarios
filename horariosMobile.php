@@ -79,7 +79,7 @@
     $tipos;
     $i = 0;
     foreach($idTipos as $id) {
-      $tipos[$i] = $tipoDao->searchById($id);
+      $tipos[$i] = $tipoDao->searchById($id)['nome'];
       $i++;
     }
     $tipos = array_unique($tipos);
@@ -130,7 +130,7 @@
             <div class="col-xs-12">
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><span class="label label-primary">' . $tipo['nome'] . '</span></h3>
+                  <h3 class="box-title"><span class="label label-primary">' . $tipo . '</span></h3>
                 </div>
                 
                 <div class="box-body">
@@ -147,7 +147,7 @@
                       <tbody>
                         ';
                         foreach($horarios as $horario) {
-                          if($tipoDao->searchById($horario['idTipo']) == $tipo) {
+                          if($tipoDao->searchById($horario['idTipo'])['nome'] == $tipo) {
                             $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
                             $prof = $professorDao->searchById($horario['idProfessor'])['nome'];
                             $sala = $salaDao->searchById($horario['idSala'])['nome'];
