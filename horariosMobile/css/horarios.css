@@ -1,0 +1,32 @@
+.container-fluid:first-of-type {
+  margin-top: 20px;
+}
+
+body {
+  /*background: linear-gradient(to right bottom, blue, lightblue);*/
+  background-color: #DEDEDE;
+  height: 100vh;
+}
+
+@media (min-width: 720px) {
+  body {
+    overflow-y: hidden;
+  }
+}
+
+#accordion .box .box-body {
+  display: none;
+}
+
+table {
+	font-size: 1.5em;
+}
+
+table th {
+	font-size: 1.4em;
+	margin-bottom: 2px;
+}
+
+table th span {
+	border-radius: 5px 5px 0px 0px !important;
+}
