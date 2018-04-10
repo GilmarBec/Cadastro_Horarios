@@ -8,7 +8,7 @@
     
     //Função de inserção de novos usuarios
     function insert($usuario){
-      $user = array('login'=>$usuario->login,'senha'=>$usuario->senha, 'nome'=>$usuario->nome);                      // setinha de merda '=>'
+      $user = array('login'=>$usuario->getLogin(),'senha'=>$usuario->getSenha(), 'nome'=>$usuario->getNome());
       $sql = 'INSERT INTO usuario (login, senha, nome) VALUES (:login, :senha, :nome)';
       $this->con->prepare($sql)->execute($user);
       echo '<script>alert("Usuario Adicionado com sucesso!");</script>';
@@ -93,8 +93,8 @@
       }
 
       try {
-        $array = array('id'=>$usuario->getId(), 'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
-        $sql = 'UPDATE usuario SET login=:login AND senha=:senha WHERE id=:id';
+        $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
+        $sql = 'UPDATE usuario SET nome:nome login=:login AND senha=:senha WHERE id=:id';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
