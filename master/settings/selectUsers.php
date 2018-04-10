@@ -25,17 +25,17 @@
     <div class="row">
       <div class="box box-info box-iframe">
         <div class="box-header with-border">
-          <div class="col-md-7">
+          <div class="col-md-6">
 						<h3 class="box-title"><label class="btn btn-primary">Settings</label></h3>
 					</div>
-					<div class="col-md-1">
+					<div class="col-md-2">
 						<h3 class="box-title">
-							<button class="btn btn-success">Usuários</button>
+							<button class="btn btn-success" onclick="window.location='/master/settings/insertUsers.php';">Cadastro de Usuário</button>
 						</h3>
 					</div>
 					<div class="col-md-2">
 						<h3 class="box-title">
-							<button class="btn btn-warning">Trocar Senha de Admin</button>
+							<button class="btn btn-warning">Trocar senha Admin</button>
 						</h3>
 					</div>
 					<div class="col-md-2">
@@ -45,11 +45,6 @@
 					</div>
         </div>
         <div class="box-body">
-        	<div class="col-md-12">
-          		<button type="button" style="margin-bottom: 10px;" onclick="window.location='/master/settings/insertUsers.php';" class="btn btn-info">
-          			Cadastrar Usuário
-          		</button>
-          </div>
           <div class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
               <div class="col-sm-12"  style="height: 70vh; overflow-y: scroll;">
