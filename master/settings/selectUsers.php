@@ -46,7 +46,7 @@
         </div>
         <div class="box-body">
         	<div class="col-md-12">
-          		<button type="button" style="margin-bottom: 10px;" onclick="window.location='/master/cadastros/professores/insert.php';" class="btn btn-info">
+          		<button type="button" style="margin-bottom: 10px;" onclick="window.location='/master/settings/insertUsers.php';" class="btn btn-info">
           			Cadastrar Usuário
           		</button>
           </div>
@@ -69,8 +69,8 @@
                           echo '<tr role="row">';
                           echo '  <td>'.$row['nome'].'</td>';
                           echo '  <td>'.$row['login'].'</td>';
-                          echo '  <td><center><a href="/master/settings/users/update.php?id='.$row['id'].'" class="btn btn-warning">Editar</a></center></td>';
-                          echo '  <td><center><a href="/master/settings/users/deleteControl.php?id='.$row['id'].'" class="btn btn-danger">Apagar</a></center></td>';
+                          echo '  <td><center><a href="/master/settings/updateUsers.php?id='.$row['id'].'" class="btn btn-warning">Editar</a></center></td>';
+                          echo '  <td><center><a href="/master/settings/controller/deleteControl.php?id='.$row['id'].'" class="btn btn-danger">Apagar</a></center></td>';
                           echo '</tr>';
                         }
                       }
