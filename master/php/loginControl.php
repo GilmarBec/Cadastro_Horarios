@@ -10,8 +10,10 @@
   $usuario->setLogin($_POST["login"]);
   $usuario->setSenha(md5($_POST["senha"]));
   
+  
+
   if($usuarioDao->login($usuario)) {
-    $linha = $usuarioDao->search($usuario['login']);
+    $linha = $usuarioDao->search($usuario->getLogin());
     
     session_start();
     $_SESSION['id'] = $linha['id'];

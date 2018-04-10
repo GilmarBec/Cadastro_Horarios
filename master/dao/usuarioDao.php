@@ -8,9 +8,9 @@
     
     //Função de inserção de novos usuarios
     function insert($usuario){
-      $user = array('login'=>$usuario->getLogin(),'senha'=>$usuario->getSenha(), 'nome'=>$usuario->getNome());
+      $array = array('login'=>$usuario->getLogin(),'senha'=>$usuario->getSenha(), 'nome'=>$usuario->getNome());
       $sql = 'INSERT INTO usuario (login, senha, nome) VALUES (:login, :senha, :nome)';
-      $this->con->prepare($sql)->execute($user);
+      $this->con->prepare($sql)->execute($array);
       echo '<script>alert("Usuario Adicionado com sucesso!");</script>';
     }
 
@@ -34,8 +34,9 @@
     
     function search($login){
       try{
+        $array = array('login'=>$login);
         $stmt = $this->con->prepare('SELECT * FROM usuario WHERE login=:login');
-        $stmt->execute();
+        $stmt->execute($array);
 
         $linha = null;
         foreach($stmt as $row) {
@@ -48,8 +49,8 @@
       }
     }
       
-    function login($login) {
-      $res = $this->search($login);
+    function login($usuario) {
+      $res = $this->search($usuario->getLogin());
       if($res != null && $res['senha'] == $usuario->getSenha()) {
         return true;
       } else {
@@ -60,9 +61,10 @@
     //Ao usar o update usar o damin/Usuario.php
     function update($usuario){
       try {
+        $array = array('login'=>$usuario->getLogin());
         $sql = 'SELECT id FROM usuarios WHERE login=:login';
         $stmt = $this->con->prepare($sql);
-        $stmt->execute($usuario);
+        $stmt->execute($array);
         
         $linha = null;
         foreach($stmt as $row) {
