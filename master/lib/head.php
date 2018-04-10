@@ -13,7 +13,6 @@
     echo '<link rel="stylesheet" href="/master/css/box.css">';
     echo '<link rel="stylesheet" href="/master/css/style.css">';
     echo "<!-- JavaScript's -->";
-    echo '<script src="/master/js/fontawesome.js"></script>';
     echo '<script src="/master/js/jquery-3.3.1.min.js"></script>';
     echo '<script src="/master/js/jquery-ui.js"></script>';
     echo '<script src="/master/js/jquery-ui.multidatespicker.js"></script>';

@@ -20,8 +20,8 @@
             <li class="dropdown<?php if($pageAtual == "cadastros") echo ' active'; ?>"<?php if(!$logado) echo ' style="display: none;"';?>>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>
               <ul class="dropdown-menu" id="dropdown">
-                <li><a href="/master/cadastroHorarios.php">Cadastro de Horários</a></li>
-                <li role="separator" class="divider"></li>
+                <li<?php if($_SESSION['login'] != "admin") echo 'style=" display: none;"'; ?>><a href="/master/cadastroHorarios.php">Cadastro de Horários</a></li>
+                <li<?php if($_SESSION['login'] != "admin") echo 'style=" display: none;"'; ?> role="separator" class="divider"></li>
                 <li><a href="/master/cadastroProfessores.php">Cadastro de Professores</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/master/cadastroSalas.php">Cadastro de Salas</a></li>
@@ -33,9 +33,9 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li<?php if(!$logado && $_SESSION['login'] != "admin") echo ' style=" display: none;"';?>><a href="/master/settings/">Settings</a></li>
+            <li<?php if($pageAtual == "settings") echo ' class="active"'; if(!$logado && $_SESSION['login'] != "admin") echo ' style=" display: none;"';?>><a href="/master/settings/">Settings</a></li>
             <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/sse/sseUpdate.php">Update</a></li>
-            <li<?php if(!$logado) echo' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>
+            <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>
           </ul>
         </div>
       </div>
