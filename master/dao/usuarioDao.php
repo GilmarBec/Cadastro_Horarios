@@ -32,41 +32,25 @@
       }
     }
     
-    function buscar($usuario){
-      try {
-        $stmt = $this->con->prepare('SELECT * FROM usuario WHERE login = :login');
-        $stmt->execute(array('login' => $usuario->getLogin()));
-        
+    function search($login){
+      try{
+        $stmt = $this->con->prepare('SELECT * FROM usuario WHERE login=:login');
+        $stmt->execute();
+
         $linha = null;
         foreach($stmt as $row) {
           $linha = $row;
         }
-        
+
         return $linha;
-      } catch(PDOException $e) {
+      } catch(PDOException $e){
         echo 'ERROR: ' . $e->getMessage();
-      }
-    }
-    
-    function selectLogin($usuario){
-      try {
-        $stmt = $this->con->prepare('SELECT login, senha FROM usuario WHERE login = :login');
-        $stmt->execute(array('login' => $usuario->getLogin()));
-     
-        foreach($stmt as $row) {
-          return $row['senha'];
-        }
-        
-        return false;
-      } catch(PDOException $e) {
-        echo 'ERROR: ' . $e->getMessage();
-        die('<br><a href="../login.php"><button>Voltar</button></a>');
       }
     }
       
-    function login($usuario) {
-      $res = $this->selectLogin($usuario);
-      if($res != null && $res == $usuario->getSenha()) {
+    function login($login) {
+      $res = $this->search($login);
+      if($res != null && $res['senha'] == $usuario->getSenha()) {
         return true;
       } else {
         return false;
