@@ -26,7 +26,7 @@
 
         return $linha;
       } catch(PDOException $e){
-        echor 'ERROR: ' . $e->getMessage();
+        echo 'ERROR: ' . $e->getMessage();
       }
     }
     
