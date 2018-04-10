@@ -6,12 +6,12 @@
   $conexao = new Conexao();
   $usuarioDao = new UsuarioDao($conexao);
   $usuario = new Usuario();
-  
+   
   $usuario->setLogin($_POST["login"]);
   $usuario->setSenha(md5($_POST["senha"]));
   
   if($usuarioDao->login($usuario)) {
-    $linha = $usuarioDao->buscar($usuario);
+    $linha = $usuarioDao->search($usuario['login']);
     
     session_start();
     $_SESSION['id'] = $linha['id'];
