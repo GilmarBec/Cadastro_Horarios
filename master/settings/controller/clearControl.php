@@ -32,15 +32,15 @@
 	    //Create Table Horario And Yours Foreign Key's
 	    $sql = "
 		    CREATE TABLE `horario` (
-				  `id` int(11) NOT NULL,
+				  `id` int(11) AUTO_INCREMENT,
 				  `idTurma` int(11) NOT NULL,
 				  `idProfessor` int(11) NOT NULL,
 				  `idSala` int(11) NOT NULL,
 				  `idTipo` int(11) NOT NULL,
-				  `turno` varchar(40) NOT NULL
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+				  `turno` varchar(40) NOT NULL,
+				  PRIMARY KEY (`id`)
+				);
 				ALTER TABLE `horario`
-				  ADD PRIMARY KEY (`id`),
 				  ADD KEY `FK_turmaHorario` (`idTurma`),
 				  ADD KEY `FK_professorHorario` (`idProfessor`),
 				  ADD KEY `FK_salaHorario` (`idSala`),
@@ -52,13 +52,13 @@
 	    //Create Table Registro And Yours Foreign Key's
 	    $sql = "
 	    	CREATE TABLE `registro` (
-				  `id` bigint(20) NOT NULL,
+				  `id` bigint(20) AUTO_INCREMENT,
 				  `idHorario` int(11) NOT NULL,
-				  `data` date NOT NULL
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+				  `data` date NOT NULL,
+				  PRIMARY KEY (`id`)
+				);
 				ALTER TABLE `registro`
-				  ADD PRIMARY KEY (`id`),
-				  ADD KEY `FK_horarioRegistro` (`idHorario`);
+				  ADD KEY `FK_horarioRegistro` (`idHorario`), AUTO_INCREMENT=1;
 	    ";
 	    $stmt = $conexao->getCon()->prepare($sql);
 	    $stmt->execute();
