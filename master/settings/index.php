@@ -1,6 +1,7 @@
 <?php
   include_once("../lib/session.php");
-  
+  if($_SESSION['login'] != "admin") Header('Location: ../');
+
   include_once("../lib/head.php");
   include_once("../lib/navbar.php");
 ?>

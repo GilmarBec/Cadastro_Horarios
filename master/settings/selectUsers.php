@@ -40,7 +40,7 @@
 					</div>
 					<div class="col-md-2">
 						<h3 class="box-title">
-							<button class="btn btn-danger">Limpar Horários</button>
+							<button class="btn btn-danger" onclick="window.location='clearHorarios.php';">Limpar Horários</button>
 						</h3>
 					</div>
         </div>
