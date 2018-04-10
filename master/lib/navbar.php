@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li <?php if($pageAtual == "home") echo ' class="active"';?>><a href="/master/">Home</a></li>
-            <li <?php if($pageAtual == "horarios") echo ' class="active"'; ?>><a href="/master/horarios.php">Horários</a></li>
+            <li><a href="/horarios/">Horários</a></li>
             <li class="dropdown<?php if($pageAtual == "cadastros") echo ' active'; ?>"<?php if(!$logado) echo ' style="display: none;"';?>>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>
               <ul class="dropdown-menu" id="dropdown">
@@ -34,7 +34,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/sse/sseUpdate.php">Update</a></li>
-            <li<?php if($pageAtual == "login") echo ' class="active"'; if($logado) echo ' style=" display: none;"';?>><a href="/master/login.php">Login</a></li>
             <li<?php if(!$logado) echo' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>
           </ul>
         </div>

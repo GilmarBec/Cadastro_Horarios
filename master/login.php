@@ -10,7 +10,6 @@
     }
   }
   
-  include_once("lib/navbar.php");
   include_once("lib/head.php");
 ?>
 
@@ -23,8 +22,6 @@
 
 <body>
   <div class="container">
-    <?php navbar("login",false); ?>
-    
     <div class="row">
       <div class="loginmodal-container">
 				<h1>Entre!</h1><br>
