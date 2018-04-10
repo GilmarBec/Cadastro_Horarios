@@ -110,30 +110,26 @@
 
 <head>
   <title>Horários Senai</title>
-  <?php
-    echo '<meta charset="utf-8">';
-    echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
-    echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-    echo "<!-- CSS's -->";
-    echo '<link rel="stylesheet" href="/master/css/jquery-ui.css">';
-    echo '<link rel="stylesheet" href="/master/css/jquery-ui.multidatespicker.css">';
-    echo '<link rel="stylesheet" href="/master/css/bootstrap.min.css">';
-    echo '<link rel="stylesheet" href="/master/css/navbar.css">';
-    echo '<link rel="icon" href="/master/img/monitor.png" type="image/png" />';
-    echo '<link rel="stylesheet" href="/master/css/box.css">';
-    echo '<link rel="stylesheet" href="/master/css/style.css">';
-    echo "<!-- JavaScript's -->";
-    echo '<script src="/master/js/fontawesome.js"></script>';
-    echo '<script src="/master/js/jquery-3.3.1.min.js"></script>';
-    echo '<script src="/master/js/jquery-ui.js"></script>';
-    echo '<script src="/master/js/jquery-ui.multidatespicker.js"></script>';
-    echo '<script src="/master/js/bootstrap.min.js"></script>';
-    echo '<script src="/master/js/timer.js"></script>';
-    echo '<script src="/master/js/script.js"></script>';
-  ?>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- CSS's -->
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/box.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  
   <link rel="stylesheet" href="css/horarios.css">
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css">
+
+  <!-- JavaScript's -->
+  <script src="js/timer.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/slick.js"></script>
   
   <style>
