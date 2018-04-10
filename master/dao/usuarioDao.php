@@ -62,7 +62,6 @@
       }
     }
       
-    //return resposta
     function login($usuario) {
       $res = $this->selectLogin($usuario);
       if($res != null && $res == $usuario->getSenha()) {
@@ -72,6 +71,7 @@
       }
     }
 
+    //Ao usar o update usar o damin/Usuario.php
     function update($usuario){
       try {
         $sql = 'SELECT id FROM usuarios WHERE login=:login';
@@ -93,6 +93,19 @@
       try {
         $array = array('id'=>$usuario->getId(), 'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
         $sql = 'UPDATE usuario SET login=:login AND senha=:senha WHERE id=:id';
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($array);
+        
+        return true;
+      } catch(PDOException $e) {
+        return $e->getMessage();
+      }
+    }
+
+    public function exclude($id){
+      try {
+        $array = array('id'=>$id);
+        $sql = 'DELETE FROM usuario WHERE id=:id';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
