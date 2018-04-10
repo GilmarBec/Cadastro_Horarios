@@ -33,6 +33,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li<?php if(!$logado && $_SESSION['login'] != "admin") echo ' style=" display: none;"';?>><a href="/master/settings/">Settings</a></li>
             <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/sse/sseUpdate.php">Update</a></li>
             <li<?php if(!$logado) echo' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>
           </ul>

@@ -117,10 +117,8 @@
   <!-- CSS's -->
   <link rel="stylesheet" href="css/jquery-ui.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/box.css">
+  <link rel="stylesheet" href="css/box.css">
   <link rel="stylesheet" href="css/style.css">
-
-  
   <link rel="stylesheet" href="css/horarios.css">
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css">
