@@ -21,12 +21,49 @@
 
   if($verify) {
 		try {
-			$stmt = $conexao->getCon()->prepare('TRUNCATE TABLE registro');
+			//Drop Table Registro
+			$stmt = $conexao->getCon()->prepare('DROP TABLE registro');
 	    $stmt->execute();
 
-	    $stmt = $conexao->getCon()->prepare('TRUNCATE TABLE horario');
+	    //Drop Table Horario
+	    $stmt = $conexao->getCon()->prepare('DROP TABLE horario');
 	    $stmt->execute();
 	    
+	    //Create Table Horario And Yours Foreign Key's
+	    $sql = "
+		    CREATE TABLE `horario` (
+				  `id` int(11) NOT NULL,
+				  `idTurma` int(11) NOT NULL,
+				  `idProfessor` int(11) NOT NULL,
+				  `idSala` int(11) NOT NULL,
+				  `idTipo` int(11) NOT NULL,
+				  `turno` varchar(40) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+				ALTER TABLE `horario`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `FK_turmaHorario` (`idTurma`),
+				  ADD KEY `FK_professorHorario` (`idProfessor`),
+				  ADD KEY `FK_salaHorario` (`idSala`),
+				  ADD KEY `FK_tipoHorario` (`idTipo`);
+			";
+	    $stmt = $conexao->getCon()->prepare($sql);
+	    $stmt->execute();
+
+	    //Create Table Registro And Yours Foreign Key's
+	    $sql = "
+	    	CREATE TABLE `registro` (
+				  `id` bigint(20) NOT NULL,
+				  `idHorario` int(11) NOT NULL,
+				  `data` date NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+				ALTER TABLE `registro`
+				  ADD PRIMARY KEY (`id`),
+				  ADD KEY `FK_horarioRegistro` (`idHorario`);
+	    ";
+	    $stmt = $conexao->getCon()->prepare($sql);
+	    $stmt->execute();
+	    //Fim do SQL//
+
 	    Header('Location: ../selectUsers.php');
 	  } catch(PDOException $e) {
 	    echo 'ERRO: ' . $e->getMessage() . '<br><a href="../selectUsers.php">Voltar</a>';
