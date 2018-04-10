@@ -16,12 +16,14 @@
 
     function select(){
       try{
-        $stmt = $this->con->prepare('SELECT id, login FROM usuario');
+        $stmt = $this->con->prepare('SELECT id, nome, login  FROM usuario WHERE NOT id=1');
         $stmt->execute();
 
         $linha = null;
+        $i = 0;
         foreach($stmt as $row) {
-          $linha = $row;
+          $linha[$i] = $row;
+          $i++;
         }
 
         return $linha;
