@@ -25,7 +25,7 @@
     <div class="row">
       <div class="box box-info box-iframe">
         <div class="box-header with-border">
-          <h3 class="box-title"><span class="label label-info">Cadastro de Usuários</span></h3>
+          <h3 class="box-title"><span class="label label-info">Editar Usuário</span></h3>
         </div>
         <form class="form-horizontal" autocomplete="disabled" action="/master/settings/controller/updateControl.php?id=<?php echo $id; ?>" method="POST">
           <div class="box-body">

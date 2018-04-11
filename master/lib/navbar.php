@@ -9,13 +9,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Horários Senai</a>
+          <a class="navbar-brand" href="/master/">Horários Senai</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li <?php if($pageAtual == "home") echo ' class="active"';?>><a href="/master/">Home</a></li>
             <li><a href="/horarios/">Horários</a></li>
             <li class="dropdown<?php if($pageAtual == "cadastros") echo ' active'; ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>

@@ -83,7 +83,7 @@
 
       try {
         $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
-        $sql = 'UPDATE usuario SET nome:nome login=:login AND senha=:senha WHERE id=:id';
+        $sql = 'UPDATE usuario SET nome=:nome, login=:login, senha=:senha WHERE id=:id';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
