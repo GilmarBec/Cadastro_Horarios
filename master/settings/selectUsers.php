@@ -35,7 +35,7 @@
 					</div>
 					<div class="col-md-2">
 						<h3 class="box-title">
-							<button class="btn btn-warning">Trocar senha Admin</button>
+							<button class="btn btn-warning" onclick="window.location='/master/settings/updateAdmin.php';">Trocar senha Admin</button>
 						</h3>
 					</div>
 					<div class="col-md-2">
@@ -64,7 +64,7 @@
                           echo '<tr role="row">';
                           echo '  <td>'.$row['nome'].'</td>';
                           echo '  <td>'.$row['login'].'</td>';
-                          echo '  <td><center><a href="/master/settings/updateUsers.php?id='.$row['id'].'" class="btn btn-warning">Editar</a></center></td>';
+                          echo '  <td><center><a href="/master/settings/updateUsers.php?id='.$row['id'].'&nome='.$row['nome'].'&login='.$row['login'].'" class="btn btn-warning">Editar</a></center></td>';
                           echo '  <td><center><a href="/master/settings/controller/deleteControl.php?id='.$row['id'].'" class="btn btn-danger">Apagar</a></center></td>';
                           echo '</tr>';
                         }

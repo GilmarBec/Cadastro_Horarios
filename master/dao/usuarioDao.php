@@ -8,10 +8,15 @@
     
     //Função de inserção de novos usuarios
     function insert($usuario){
-      $array = array('login'=>$usuario->getLogin(),'senha'=>$usuario->getSenha(), 'nome'=>$usuario->getNome());
-      $sql = 'INSERT INTO usuario (login, senha, nome) VALUES (:login, :senha, :nome)';
-      $this->con->prepare($sql)->execute($array);
-      echo '<script>alert("Usuario Adicionado com sucesso!");</script>';
+      try{
+        $array = array('login'=>$usuario->getLogin(),'senha'=>$usuario->getSenha(), 'nome'=>$usuario->getNome());
+        $stmt = $this->con->prepare('INSERT INTO usuario (login, senha, nome) VALUES (:login, :senha, :nome)');
+        $stmt->execute($array);
+
+        return true;
+      } catch(PDOException $e){
+        return false;
+      }
     }
 
     function select(){
@@ -28,7 +33,7 @@
 
         return $linha;
       } catch(PDOException $e){
-        echo 'ERROR: ' . $e->getMessage();
+        return $e->getMessage();
       }
     }
     
@@ -62,7 +67,7 @@
     function update($usuario){
       try {
         $array = array('login'=>$usuario->getLogin());
-        $sql = 'SELECT id FROM usuarios WHERE login=:login';
+        $sql = 'SELECT id FROM usuario WHERE login=:login';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
@@ -71,16 +76,27 @@
           $linha = $row;
         }
         
-        if($linha != null) {
-          return false;
-        }
+        if($linha != null) if($linha['id'] != $usuario->getId()) return false;
       } catch(PDOException $e) {
-        return $e->getMessage();
+        return false;
       }
 
       try {
         $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
         $sql = 'UPDATE usuario SET nome:nome login=:login AND senha=:senha WHERE id=:id';
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($array);
+        
+        return true;
+      } catch(PDOException $e) {
+        return false;
+      }
+    }
+
+    function updateAdminPass($pass){
+      try {
+        $array = array('senha'=>$pass);
+        $sql = 'UPDATE usuario SET senha=:senha WHERE id=1';
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         

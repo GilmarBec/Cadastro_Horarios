@@ -1,6 +1,10 @@
 <?php
   include_once('../lib/head.php');
   
+  $id = $_GET['id'];
+  $nome = $_GET['nome'];
+  $login = $_GET['login'];
+
   if(ISSET($_GET['r'])) {
     $r = $_GET['r'];
     
@@ -23,20 +27,20 @@
         <div class="box-header with-border">
           <h3 class="box-title"><span class="label label-info">Cadastro de Usuários</span></h3>
         </div>
-        <form class="form-horizontal" autocomplete="disabled" action="/master/settings/controller/insertControl.php" method="POST">
+        <form class="form-horizontal" autocomplete="disabled" action="/master/settings/controller/updateControl.php?id=<?php echo $id; ?>" method="POST">
           <div class="box-body">
             <div class="form-group">
               <label for="inputNome" class="col-sm-2 control-label">Nome</label>
 
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome">
+                <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome" value="<?php echo $nome; ?>">
               </div>
             </div>
             <div class="form-group">
               <label for="inputLogin" class="col-sm-2 control-label">Login</label>
 
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Login">
+                <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Login" value="<?php echo $login; ?>">
               </div>
             </div>
             <div class="form-group">
@@ -55,8 +59,6 @@
       </div>
     </div>
   </div>
-
-  <script>document.getElementById('inputNome').focus();</script>
 </body>
 
 </html>
