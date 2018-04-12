@@ -43,16 +43,28 @@
 				// $j++;
 			// }
 		}
+		$values = [];
+		$cont = 0;
+		$endLine = 0;
 		foreach ($array as $row) {
-			// echo $row[2] . " / ";
-			// echo $row[3] . " / ";
-			// echo $row[6] . " / ";
-			// echo $row[9] . " / ";
-			// echo $row[11] . " / ";
-			// echo $row[16] . " / ";
-			// echo $row[17] . " / ";
-			// echo '<br><br><br><br>';
-			echo count($row) . "<br>";
+			if(count($row) == 8) {
+				$values[$cont-$endLine][0] = $row[3];
+				$values[$cont-$endLine][1] = $row[6];
+				$endLine++;
+			} else if(count($row) == 16) {
+				$values[$cont-$endLine][2] = $row[2];
+				$values[$cont-$endLine][3] = $row[4];
+				$values[$cont-$endLine][4] = $row[9];
+				$values[$cont-$endLine][5] = $row[10];
+			} else if(count($row) == 1) $endLine++;
+			// else echo count($row) . "<br>";
+			$cont ++;
+		}
+		foreach ($values as $linha) {
+			foreach ($linha as $coluna) {
+				echo $coluna . " -- ";
+			}
+			echo "<br>";
 		}
 		// echo count($csv);
 		fclose($f);
