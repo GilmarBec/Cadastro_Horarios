@@ -45,31 +45,34 @@
 		}
 		$values = [];
 		$cont = 0;
-		$endLine = 0;
 		foreach ($array as $row) {
-			if(count($row) == 8) {
-				$values[$cont-$endLine][0] = $row[3];
-				$values[$cont-$endLine][1] = $row[6];
-				$endLine++;
-			} else if(count($row) == 16) {
-				$values[$cont-$endLine][2] = $row[2];
-				$values[$cont-$endLine][3] = $row[4];
-				$values[$cont-$endLine][4] = $row[9];
-				$values[$cont-$endLine][5] = $row[10];
-			} else if(count($row) == 23) {
-				$values[$cont-$endLine][0] = $row[3];
-				$values[$cont-$endLine][1] = $row[6];
-				$values[$cont-$endLine][2] = $row[9];
-				$values[$cont-$endLine][3] = $row[11];
-				$values[$cont-$endLine][4] = $row[16];
-				$values[$cont-$endLine][5] = $row[17];
-			} else if(count($row) == 1) $endLine++;
+			if(count($row) == 8 && $row[7] != "-") {
+				$values[$cont][0] = $row[3];
+				$values[$cont][1] = $row[6];
+				$cont--;
+			} else if(count($row) == 16 && $row[9] != "-") {
+				$values[$cont][2] = $row[2];
+				$values[$cont][3] = $row[4];
+				$values[$cont][4] = $row[9];
+				$values[$cont][5] = $row[10];
+			} else if(count($row) == 23 && $row[3] != "-") {
+				$values[$cont][0] = $row[3];
+				$values[$cont][1] = $row[6];
+				$values[$cont][2] = $row[9];
+				$values[$cont][3] = $row[11];
+				$values[$cont][4] = $row[16];
+				$values[$cont][5] = $row[17];
+			} else $cont--;
 			$cont ++;
 		}
-		foreach ($values as $linha) {
-			foreach ($linha as $coluna) {
-				echo $coluna . " -- ";
-			}
+		foreach ($values as $i => $linha) {
+			echo '<b>Registro ' . ($i+1) . '</b><br>';
+			echo '<b>Tipo</b> ' . $linha[0] . "<br>";
+			echo '<b>Curso</b> ' . $linha[1] . "<br>";
+			echo '<b>Turno</b> ' . $linha[2] . "<br>";
+			echo '<b>Data</b> ' . $linha[3] . "<br>";
+			echo '<b>Professor</b> ' . $linha[4] . "<br>";
+			echo '<b>Sala</b> ' . $linha[5] . "<br>";
 			echo "<br>";
 		}
 		// echo count($csv);
