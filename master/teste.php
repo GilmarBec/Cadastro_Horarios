@@ -56,8 +56,14 @@
 				$values[$cont-$endLine][3] = $row[4];
 				$values[$cont-$endLine][4] = $row[9];
 				$values[$cont-$endLine][5] = $row[10];
+			} else if(count($row) == 23) {
+				$values[$cont-$endLine][0] = $row[3];
+				$values[$cont-$endLine][1] = $row[6];
+				$values[$cont-$endLine][2] = $row[9];
+				$values[$cont-$endLine][3] = $row[11];
+				$values[$cont-$endLine][4] = $row[16];
+				$values[$cont-$endLine][5] = $row[17];
 			} else if(count($row) == 1) $endLine++;
-			// else echo count($row) . "<br>";
 			$cont ++;
 		}
 		foreach ($values as $linha) {
