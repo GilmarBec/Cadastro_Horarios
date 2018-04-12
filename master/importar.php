@@ -13,10 +13,10 @@
 
 <body style="overflow-y: hidden;">
   <div class="container">
-    <?php navbar("cadastros",$logado); ?>
+    <?php navbar("importar",$logado); ?>
     
     <div class="row embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" id="iframeCadastroHorarios" name="iframeCadastroHorarios" src="/master/cadastros/horarios/select.php"></iframe>
+      <iframe class="embed-responsive-item" id="iframeImportar" name="iframeImportar" src="/master/importar/"></iframe>
     </div>
   </div>
 </body>

@@ -1,26 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Teste XLS</title>
-	<meta charset="utf-8">
-	<script>
-		function validar() {
-			if(document.getElementById("file").value.substr(-4) == ".csv") {
-				document.getElementById("upload").submit();
-			} else {
-				alert("Formato não suportado!");
-			}
-		}
-	</script>
-</head>
-<body>
-	<form id="upload" method="POST" enctype="multipart/form-data">
-		<input id="file" type="file" name="file" accept=".csv"><br>
-		<button type="button" onclick="validar()">Enviar</button>
-	</form>
-</body>
-</html>
-
 <?php
 	if(isset($_FILES['file'])) {
 		$file = $_FILES['file'];

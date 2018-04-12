@@ -29,6 +29,7 @@
                 <li><a href="/master/cadastroTurmas.php">Cadastro de Turmas</a></li>
               </ul>
             </li>
+            <li<?php if($pageAtual == "importar") echo ' class="active"'; ?>><a href="/master/importar.php">Importações</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li<?php if($pageAtual == "settings") echo ' class="active"'; if($_SESSION['login'] != "admin") echo ' style=" display: none;"';?>><a href="/master/settings/">Settings</a></li>
