@@ -40,17 +40,22 @@
     <div class="row">
       <div class="box box-info box-iframe">
         <div class="box-header with-border">
-          <h3 class="box-title"><span class="label label-info">Importações</span></h3>
+          <div class="col-sm-10">
+            <h3 class="box-title"><span class="label label-info label-sm">Importações</span></h3>
+          </div>
+          <div class="col-sm-2">
+            <h3 class="box-title"><a class="btn btn-primary btn-xs" target="_blank" href="https://convertio.co/pt/">Conversor de XLS para CSV</a></h3>
+          </div>
         </div>
         <div class="box-body">
-          <form id="formRegistros" class="form-group" action="controller/registrosControl.php" method="POST" enctype="multipart/form-data">
-            <label for="labelInputRegistros" class="col-sm-2 control-label">Importar Registros</label>
+          <form id="formHorarios" class="form-group" action="controller/horariosControl.php" method="POST" enctype="multipart/form-data">
+            <label for="labelInputHorarios" class="col-sm-2 control-label">Importar Horarios</label>
 
             <div class="col-sm-10 input-group">
-            	<label id="labelInputRegistros" class="form-control labelInputFile" for="registros">Escolher Arquivo</label>
-              <input id="registros" type="file" name="file" accept=".csv">
+            	<label id="labelInputHorarios" class="form-control labelInputFile" for="horarios">Escolher Arquivo</label>
+              <input id="horarios" type="file" name="file" accept=".csv">
               <span class="input-group-btn">
-              	<button type="button" class="btn btn-success" onclick='validar("registros", "formRegistros")'>Importar</button>
+              	<button type="button" class="btn btn-success" onclick='validar("horarios", "formForarios")'>Importar</button>
               </span>
             </div>
           </form>
@@ -85,8 +90,8 @@
 </html>
 
 <script>
-	$('#registros').on('change', function(){
-		$('#labelInputRegistros').text("Escolher Arquivo - " + $('#registros').val().split('\\')[2]);
+	$('#horarios').on('change', function(){
+		$('#labelInputhorarios').text("Escolher Arquivo - " + $('#horarios').val().split('\\')[2]);
 	});
 	$('#professores').on('change', function(){
 		$('#labelInputProfessores').text("Escolher Arquivo - " + $('#professores').val().split('\\')[2]);
@@ -97,8 +102,7 @@
 	function validar(id, idForm) {
 		if($("#"+id).val().substr(-4) == ".csv") {
 			$("#"+idForm).submit();
-		} else {
-			alert("Formato não suportado!");
-		}
+		} else if($("#"+id).val() == "") {
+    } else alert("Formato não suportado!");
 	}
 </script>
