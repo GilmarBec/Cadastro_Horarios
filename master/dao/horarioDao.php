@@ -166,5 +166,36 @@
         return $e->getMessage();
       }
     }
+
+    public function clear(){
+      try {
+        $stmt = $this->con->prepare('DROP TABLE horario');
+        $stmt->execute();
+        
+        //Create Table Horario And Yours Foreign Key's
+        $sql = "
+          CREATE TABLE `horario` (
+            `id` int(11) AUTO_INCREMENT,
+            `idTurma` int(11) NOT NULL,
+            `idProfessor` int(11) NOT NULL,
+            `idSala` int(11) NOT NULL,
+            `idTipo` int(11) NOT NULL,
+            `turno` varchar(40) NOT NULL,
+            PRIMARY KEY (`id`)
+          );
+          ALTER TABLE `horario`
+            ADD KEY `FK_turmaHorario` (`idTurma`),
+            ADD KEY `FK_professorHorario` (`idProfessor`),
+            ADD KEY `FK_salaHorario` (`idSala`),
+            ADD KEY `FK_tipoHorario` (`idTipo`);
+        ";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        
+        return true;
+      } catch(PDOException $e) {
+        return $e->getMessage();
+      }
+    }
   }
 ?>

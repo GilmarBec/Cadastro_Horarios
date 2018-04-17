@@ -1,18 +1,5 @@
 <?php
   include_once('../lib/head.php');
-  
-  if(ISSET($_GET['r'])) {
-    $r = $_GET['r'];
-    if(ISSET($_GET['erro'])) $erro = $_GET['erro'];
-    
-    if($r == 1) {
-      Header('location: select.php');
-    } else if($r == 2) {
-      echo '<script>alert("Horário já cadastrado!")</script>';
-    } else if($r == 3) {
-      echo '<script>alert("Erro: '.$erro.'")</script>';
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -74,10 +61,21 @@
             <label for="labelInputSalas" class="col-sm-2 control-label">Importar Salas</label>
 
             <div class="col-sm-10 input-group">
-            	<label id="labelInputSalas" class="form-control labelInputFile" for="salas">Escolher Arquivo</label>
+              <label id="labelInputSalas" class="form-control labelInputFile" for="salas">Escolher Arquivo</label>
               <input id="salas" type="file" name="file" accept=".csv">
               <span class="input-group-btn">
-              	<button type="button" class="btn btn-success" onclick='validar("salas", "formSalas")'>Importar</button>
+                <button type="button" class="btn btn-success" onclick='validar("salas", "formSalas")'>Importar</button>
+              </span>
+            </div>
+          </form>
+          <form id="formTurmas" class="form-group" action="controller/turmasControl.php" method="POST" enctype="multipart/form-data">
+            <label for="labelInputTurmas" class="col-sm-2 control-label">Importar Turmas</label>
+
+            <div class="col-sm-10 input-group">
+            	<label id="labelInputTurmas" class="form-control labelInputFile" for="turmas">Escolher Arquivo</label>
+              <input id="turmas" type="file" name="file" accept=".csv">
+              <span class="input-group-btn">
+              	<button type="button" class="btn btn-success" onclick='validar("turmas", "formTurmas")'>Importar</button>
               </span>
             </div>
           </form>
@@ -97,7 +95,10 @@
 		$('#labelInputProfessores').text("Escolher Arquivo - " + $('#professores').val().split('\\')[2]);
 	});
 	$('#salas').on('change', function(){
-		$('#labelInputSalas').text("Escolher Arquivo - " + $('#salas').val().split('\\')[2]);
+    $('#labelInputSalas').text("Escolher Arquivo - " + $('#salas').val().split('\\')[2]);
+  });
+  $('#turmas').on('change', function(){
+		$('#labelInputTurmas').text("Escolher Arquivo - " + $('#turmas').val().split('\\')[2]);
 	});
 	function validar(id, idForm) {
 		if($("#"+id).val().substr(-4) == ".csv") {

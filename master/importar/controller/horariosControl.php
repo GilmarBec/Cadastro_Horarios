@@ -9,6 +9,10 @@
 	include_once('../../dao/turmaDao.php');
 
 	include_once('../../domain/horario.php');
+	include_once('../../domain/professor.php');
+	include_once('../../domain/sala.php');
+	include_once('../../domain/tipo.php');
+	include_once('../../domain/turma.php');
 
 	$conexao = new Conexao();
 	$alterarDao = new AlterarDao($conexao);
@@ -38,14 +42,14 @@
 		} else if(count($row) == 16 && $row[9] != "-") {
 			$values[$cont][2] = $row[2];
 			$values[$cont][3] = $row[4];
-			$values[$cont][4] = $row[9];
+			$values[$cont][4] = explode(" ", $row[9])[0] . " " . explode(" ", $row[9])[count(explode(" ", $row[9]))-1];
 			$values[$cont][5] = substr($row[10], -3);
 		} else if(count($row) == 23 && $row[3] != "-") {
 			$values[$cont][0] = $row[3];
 			$values[$cont][1] = $row[6];
 			$values[$cont][2] = $row[9];
 			$values[$cont][3] = $row[11];
-			$values[$cont][4] = $row[16];
+			$values[$cont][4] = explode(" ", $row[16])[0] . " " . explode(" ", $row[16])[count(explode(" ", $row[16]))-1];
 			if(substr($row[17], -3) == "CIG") $values[$cont][5] = "-----";
 			else if(substr($row[17], -3) == "RIO") $values[$cont][5] = substr($row[17], -10);
 			else if(substr($row[17], -3) == "EP)") $values[$cont][5] = substr($row[17], -9, -6);
@@ -55,17 +59,68 @@
 	}
 
 	// 0 = Tipo
-	// 1 = Curso
-	// 2 = Professor
-	// 3 = Turno
-	// 4 = Data
+	// 1 = Turma
+	// 2 = Turno
+	// 3 = Data
+	// 4 = Professor
 	// 5 = Sala
 
+	$horarioDao->clear();
+	$registroDao->clear();
+
 	foreach ($values as $value) {
-		
-		
+		$tipo = new Tipo();
+		switch ($value[0]) {
+			case 'Ensino Médio':
+				$tipo->setNome('ENSINO MÉDIO');
+				break;
+			case 'Qualificação / Aperfeiçoamento':
+				$tipo->setNome('CURTA DURAÇÃO / EVENTOS');
+				break;
+			case 'Curso Técnico':
+				$tipo->setNome('TÉCNICO');
+				break;
+			case 'Aprendizagem Industrial':
+				$tipo->setNome('APRENDIZAGEM');
+				break;
+			default:
+				$tipo->setNome($value[0]);
+				break;
+		}
+		$tipoDao->insert($tipo);
+		$tipo->setId($tipoDao->search($tipo)[0]['id']);
+
+		$turma = new Turma();
+		$turma->setNome($value[1]);
+		$turma->setTurno($value[2]);
+		$turmaDao->insert($turma);
+		$turma->setId($turmaDao->search($turma)[0]['id']);
+
+		$professor = new Professor();
+		$professor->setNome($value[4]);
+		$professor->setId($professorDao->search($professor)[0]['id']);
+
+		$sala = new Sala();
+		$sala->setNome($value[5]);
+		$sala->setId($salaDao->search($sala)[0]['id']);
+
 		$horario = new Horario();
+		$horario->setTurno($turma->getTurno());
+		$horario->setTurma($turma->getId());
+		$horario->setProfessor($professor->getId());
+		$horario->setSala($sala->getId());
+		$horario->setTipo($tipo->getId());
+
+		$horarioDao->insert($horario);
+		$horario->setId($horarioDao->searchByAll($horario)['id']);
+
+		$data = explode("/", $value[3]);
+		$date[0] = $data[2] . "-" . $data[1] . "-" . $data[0];
+		$registroDao->insert($horario->getId(), $date);
 	}
 
+	$alterarDao->update();
+
 	fclose($f);
+	Header('Location: ../');
 ?>

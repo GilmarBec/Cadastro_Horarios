@@ -123,5 +123,30 @@
         return $e->getMessage();
       }
     }
+
+    public function clear(){
+      try {
+        $stmt = $this->con->prepare('DROP TABLE registro');
+        $stmt->execute();
+
+        //Create Table Registro And Your Foreign Key
+        $sql = "
+          CREATE TABLE `registro` (
+            `id` bigint(20) AUTO_INCREMENT,
+            `idHorario` int(11) NOT NULL,
+            `data` date NOT NULL,
+            PRIMARY KEY (`id`)
+          );
+          ALTER TABLE `registro`
+            ADD KEY `FK_horarioRegistro` (`idHorario`), AUTO_INCREMENT=1;
+        ";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        
+        return true;
+      } catch(PDOException $e) {
+        return $e->getMessage();
+      }
+    }
   }
 ?>
