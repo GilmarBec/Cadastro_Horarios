@@ -55,7 +55,7 @@
             	<label id="labelInputHorarios" class="form-control labelInputFile" for="horarios">Escolher Arquivo</label>
               <input id="horarios" type="file" name="file" accept=".csv">
               <span class="input-group-btn">
-              	<button type="button" class="btn btn-success" onclick='validar("horarios", "formForarios")'>Importar</button>
+              	<button type="button" class="btn btn-success" onclick='validar("horarios", "formHorarios")'>Importar</button>
               </span>
             </div>
           </form>
@@ -91,7 +91,7 @@
 
 <script>
 	$('#horarios').on('change', function(){
-		$('#labelInputhorarios').text("Escolher Arquivo - " + $('#horarios').val().split('\\')[2]);
+		$('#labelInputHorarios').text("Escolher Arquivo - " + $('#horarios').val().split('\\')[2]);
 	});
 	$('#professores').on('change', function(){
 		$('#labelInputProfessores').text("Escolher Arquivo - " + $('#professores').val().split('\\')[2]);

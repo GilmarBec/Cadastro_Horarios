@@ -34,6 +34,7 @@
 			$values[$cont][3] = $row[11];
 			$values[$cont][4] = $row[16];
 			if(substr($row[17], -3) == "CIG") $values[$cont][5] = "-----";
+			else if(!is_int(intval(substr($row[17], -3)))) $values[$cont][5] = "-----";
 			else $values[$cont][5] = substr($row[17], -3);
 		} else $cont--;
 		$cont ++;

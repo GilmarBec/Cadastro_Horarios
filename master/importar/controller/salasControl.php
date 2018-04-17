@@ -26,7 +26,8 @@
 			$values[$cont][2] = $row[2];
 			$values[$cont][3] = $row[4];
 			$values[$cont][4] = $row[9];
-			$values[$cont][5] = substr($row[10], -3);
+			if(!is_int((int)(substr($row[10], -3)))) $values[$cont][5] = "-----";
+			else $values[$cont][5] = substr($row[10], -3);
 		} else if(count($row) == 23 && $row[3] != "-") {
 			$values[$cont][0] = $row[3];
 			$values[$cont][1] = $row[6];
@@ -34,6 +35,8 @@
 			$values[$cont][3] = $row[11];
 			$values[$cont][4] = $row[16];
 			if(substr($row[17], -3) == "CIG") $values[$cont][5] = "-----";
+			else if(substr($row[17], -3) == "RIO") $values[$cont][5] = substr($row[17], -10);
+			else if(substr($row[17], -3) == "EP)") $values[$cont][5] = substr($row[17], -9, -6);
 			else $values[$cont][5] = substr($row[17], -3);
 		} else $cont--;
 		$cont ++;
