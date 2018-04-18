@@ -100,9 +100,10 @@
   $('#turmas').on('change', function(){
 		$('#labelInputTurmas').text("Escolher Arquivo - " + $('#turmas').val().split('\\')[2]);
 	});
+
 	function validar(id, idForm) {
 		if($("#"+id).val().substr(-4) == ".csv") {
-			$("#"+idForm).submit();
+      if(confirm("Realizar importação irá limpar os horários cadastrados!\nTem certeza que deseja fazer isso?")) $("#"+idForm).submit();
 		} else if($("#"+id).val() == "") {
     } else alert("Formato não suportado!");
 	}

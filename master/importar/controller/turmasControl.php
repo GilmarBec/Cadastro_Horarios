@@ -1,9 +1,15 @@
 <?php
 	include_once('../../lib/conexao.php');
+	include_once('../../dao/alterarDao.php');
+	include_once('../../dao/horarioDao.php');
+	include_once('../../dao/registroDao.php');
 	include_once('../../dao/turmaDao.php');
 	include_once('../../domain/turma.php');
 
 	$conexao = new Conexao();
+	$alterarDao = new AlterarDao($conexao);
+	$horarioDao = new HorarioDao($conexao);
+	$registroDao = new RegistroDao($conexao);
 	$turmaDao = new TurmaDao($conexao);
 
 	$file = $_FILES['file'];
@@ -15,38 +21,31 @@
 			$array[$i-1] = $csv[$i];
 		}
 	}
+
 	$values = [];
 	$cont = 0;
 	foreach ($array as $row) {
 		if(count($row) == 8 && $row[7] != "-") {
-			$values[$cont][0] = $row[3];
-			$values[$cont][1] = $row[6];
+			$values[$cont][0] = $row[6];
 			$cont--;
 		} else if(count($row) == 16 && $row[9] != "-") {
-			$values[$cont][2] = $row[2];
-			$values[$cont][3] = $row[4];
-			$values[$cont][4] = $row[9];
-			if(!is_int((int)(substr($row[10], -3)))) $values[$cont][5] = "-----";
-			else $values[$cont][5] = substr($row[10], -3);
+			$values[$cont][1] = $row[2];
 		} else if(count($row) == 23 && $row[3] != "-") {
-			$values[$cont][0] = $row[3];
-			$values[$cont][1] = $row[6];
-			$values[$cont][2] = $row[9];
-			$values[$cont][3] = $row[11];
-			$values[$cont][4] = $row[16];
-			if(substr($row[17], -3) == "CIG") $values[$cont][5] = "-----";
-			else if(substr($row[17], -3) == "RIO") $values[$cont][5] = substr($row[17], -10);
-			else if(substr($row[17], -3) == "EP)") $values[$cont][5] = substr($row[17], -9, -6);
-			else $values[$cont][5] = substr($row[17], -3);
+			$values[$cont][0] = $row[6];
+			$values[$cont][1] = $row[9];
 		} else $cont--;
 		$cont ++;
 	}
+
 	$turmas = [];
 	foreach ($values as $i => $linha) {
-		$turmas[$i]['turma'] = $linha[1];
-		$turmas[$i]['turno'] = $linha[2];
+		$turmas[$i]['turma'] = $linha[0];
+		$turmas[$i]['turno'] = $linha[1];
 	}
-
+	
+	$horarioDao->clear();
+	$registroDao->clear();
+	
 	try {
 	  $stmt = $conexao->getCon()->prepare('DROP TABLE turma');
 	  $stmt->execute();
@@ -72,7 +71,8 @@
 		$turmaDao->insert($turma);
 	}
 
-	fclose($f);
+	$alterarDao->update();
 
+	fclose($f);
 	Header('location: ../');
 ?>

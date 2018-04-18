@@ -14,18 +14,3 @@
     margin-right: 0px !important;
   }
 }
-
-.container.fluid {
-    width: 95%;
-    max-width: 100vw;
-    > .row{
-        margin: 0;
-        > .col{
-            padding: 0;
-        }
-    }
-}
-
-.container.fluid .box {
-	margin-top: 30px;
-}

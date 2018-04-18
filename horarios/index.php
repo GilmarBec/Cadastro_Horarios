@@ -209,7 +209,7 @@
                               echo '</tr>';
                             }
                             
-                            if($contador == $limit) {
+                            if($contador > $limit) {
                               echo '
                           </tbody>
                         </table>

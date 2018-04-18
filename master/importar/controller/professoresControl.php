@@ -1,9 +1,15 @@
 <?php
 	include_once('../../lib/conexao.php');
+	include_once('../../dao/alterarDao.php');
+	include_once('../../dao/horarioDao.php');
+	include_once('../../dao/registroDao.php');
 	include_once('../../dao/professorDao.php');
 	include_once('../../domain/professor.php');
 
 	$conexao = new Conexao();
+	$alterarDao = new AlterarDao($conexao);
+	$horarioDao = new HorarioDao($conexao);
+	$registroDao = new RegistroDao($conexao);
 	$professorDao = new ProfessorDao($conexao);
 
 	$file = $_FILES['file'];
@@ -19,32 +25,25 @@
 	$cont = 0;
 	foreach ($array as $row) {
 		if(count($row) == 8 && $row[7] != "-") {
-			$values[$cont][0] = $row[3];
-			$values[$cont][1] = $row[6];
 			$cont--;
 		} else if(count($row) == 16 && $row[9] != "-") {
-			$values[$cont][2] = $row[2];
-			$values[$cont][3] = $row[4];
-			$values[$cont][4] = $row[9];
-			$values[$cont][5] = substr($row[10], -3);
+			$values[$cont] = $row[9];
 		} else if(count($row) == 23 && $row[3] != "-") {
-			$values[$cont][0] = $row[3];
-			$values[$cont][1] = $row[6];
-			$values[$cont][2] = $row[9];
-			$values[$cont][3] = $row[11];
-			$values[$cont][4] = $row[16];
-			if(substr($row[17], -3) == "CIG") $values[$cont][5] = "-----";
-			else if(!is_int(intval(substr($row[17], -3)))) $values[$cont][5] = "-----";
-			else $values[$cont][5] = substr($row[17], -3);
+			$values[$cont] = $row[16];
 		} else $cont--;
 		$cont ++;
 	}
+
 	$professores = [];
 	foreach ($values as $linha) {
-		array_push($professores, $linha[4]);
+		array_push($professores, $linha);
 	}
+
 	$professores = array_unique($professores);
 	asort($professores);
+	
+	$horarioDao->clear();
+	$registroDao->clear();
 	
 	try {
     $stmt = $conexao->getCon()->prepare('DROP TABLE professor');
@@ -69,7 +68,8 @@
 		$professorDao->insert($professor);
 	}
 
-	fclose($f);
+	$alterarDao->update();
 
+	fclose($f);
 	Header('location: ../');
 ?>

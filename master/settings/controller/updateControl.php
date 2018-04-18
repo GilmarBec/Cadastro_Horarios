@@ -14,7 +14,6 @@
   
   
   $result = $usuarioDao->update($usuario);
-  if($result == false) echo "False";
   if($result === true) {
     Header('location: ../selectUsers.php');
   } else if($result === false) {

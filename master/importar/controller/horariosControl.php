@@ -26,12 +26,14 @@
 	$file = $_FILES['file'];
 	$f = fopen($file['tmp_name'], "r");
 	$csv = array_map('str_getcsv', file($file['tmp_name']));
+	
 	$array = [];
 	for ($i = 1; $i < count($csv); $i++) {
 		for ($j = 0; $j < 23; $j++) { 
 			$array[$i-1] = $csv[$i];
 		}
 	}
+	
 	$values = [];
 	$cont = 0;
 	foreach ($array as $row) {

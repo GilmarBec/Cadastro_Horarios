@@ -59,7 +59,7 @@
           <h3 class="box-title"><span class="label label-info">Cadastro de Horários</span></h3>
         </div>
         <form class="form-horizontal" action="/master/cadastros/horarios/php/updateControl.php?id=<?php echo $id; ?>" method="POST">
-          <div class="box-body" style="height: 70vh; overflow-y: scroll; overflow-x: hidden;">
+          <div class="box-body" style="height: 74.5vh; overflow-y: scroll; overflow-x: hidden;">
             <div class="form-group">
               <label for="turno" class="col-sm-2 control-label">Turno</label>
 

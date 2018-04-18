@@ -436,6 +436,10 @@
   height: 90vh;
 }
 
+.box.box-iframe .box-body{
+  padding-bottom: 0px;
+}
+
 .container-horarios {
   margin-top: 3vh;
 }

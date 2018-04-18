@@ -82,8 +82,15 @@
       }
 
       try {
-        $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
-        $sql = 'UPDATE usuario SET nome=:nome, login=:login, senha=:senha WHERE id=:id';
+        $array = null;
+        if($usuario->getSenha() == "d41d8cd98f00b204e9800998ecf8427e") {
+          $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin());
+          $sql = 'UPDATE usuario SET nome=:nome, login=:login WHERE id=:id';
+        } else {
+          $array = array('id'=>$usuario->getId(), 'nome'=>$usuario->getNome(),'login'=>$usuario->getLogin(), 'senha'=>$usuario->getSenha());
+          $sql = 'UPDATE usuario SET nome=:nome, login=:login, senha=:senha WHERE id=:id';
+        }
+
         $stmt = $this->con->prepare($sql);
         $stmt->execute($array);
         
