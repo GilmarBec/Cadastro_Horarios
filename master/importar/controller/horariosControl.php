@@ -88,7 +88,7 @@
 				$tipo->setNome('APRENDIZAGEM');
 				break;
 			default:
-				$tipo->setNome($value[0]);
+				$tipo->setNome('CURTA DURAÇÃO / EVENTOS');
 				break;
 		}
 		$tipoDao->insert($tipo);
