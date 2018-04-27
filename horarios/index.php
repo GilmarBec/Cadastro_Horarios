@@ -84,23 +84,23 @@
     switch(count($tipos)) {
       case 1:
         $classeBox = " box-full";
-        $classeCol = "col-md-12";
+        $classeCol = "col-sm-12";
         $limit = 16;
         break;
       case 2:
         $classeBox = " box-full";
-        $classeCol = "col-md-6";
+        $classeCol = "col-sm-6";
         $limit = 16;
         break;
       case 3:
-        $classeBox = " box-middle";
-        $classeCol = "col-md-6";
-        $limit = 7;
+        $classeBox = " box-full";
+        $classeCol = "col-sm-4";
+        $limit = 16;
         break;
       case 4:
-        $classeBox = " box-middle";
-        $classeCol = "col-md-6";
-        $limit = 7;
+        $classeBox = " box-full";
+        $classeCol = "col-sm-4";
+        $limit = 16;
         break;
     }
   }
@@ -137,9 +137,9 @@
   </style>
   
   <script>
-    if (screen.width < 720) {
-      window.location.href = "horariosMobile.php";
-    }
+    // if (screen.width < 720) {
+    //   window.location.href = "horariosMobile.php";
+    // }
   </script>
   
   <script>
@@ -170,10 +170,11 @@
         $slick = 0;
         foreach ($tipos as $tipo) {
           $slick++;
-          if(count($tipos) == 3) {
+          if(count($tipos) == 4) {
             $i++;
-            if($i == 3) {
-              $classeCol = " col-md-12";
+            if($i >= 3) {
+              $classeBox = " box-middle";
+              $limit = 7;
             }
           }
           echo '
@@ -188,9 +189,9 @@
                       <table class="table no-margin">
                         <thead>
                           <tr>
-                            <th class="col-md-6"><span class="label label-info">Turma</span></th>
-                            <th class="col-md-4"><span class="label label-info">Professor</span></th>
-                            <th class="col-md-2"><span class="label label-info">Sala</span></th>
+                            <th class="col-sm-6"><span class="label label-info">Turma</span></th>
+                            <th class="col-sm-4"><span class="label label-info">Professor</span></th>
+                            <th class="col-sm-2"><span class="label label-info">Sala</span></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -208,9 +209,9 @@
                         <table class="table no-margin">
                           <thead>
                             <tr>
-                              <th class="col-md-6"><span class="label label-info">Turma</span></th>
-                              <th class="col-md-4"><span class="label label-info">Professor</span></th>
-                              <th class="col-md-2"><span class="label label-info">Sala</span></th>
+                              <th class="col-sm-6"><span class="label label-info">Turma</span></th>
+                              <th class="col-sm-4"><span class="label label-info">Professor</span></th>
+                              <th class="col-sm-2"><span class="label label-info">Sala</span></th>
                             </tr>
                           </thead>
                           <tbody>';
@@ -252,7 +253,7 @@
       }
       if($horarios == null) {
         echo '
-          <div class="col-md-12">
+          <div class="col-sm-12">
             <div class="box box-info box-full">
               <div class="box-header" style="text-align: center;">
                 <h1 class="box-title label label-warning" style="margin-top: 40vh;">Sem horários cadastrados!</h1>
