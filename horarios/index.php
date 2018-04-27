@@ -197,19 +197,7 @@
                           ';
                           $contador = 0;
                           foreach($horarios as $horario) {
-                            if($tipoDao->searchById($horario['idTipo'])['nome'] == $tipo) {
-                              $contador++;
-                              $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
-                              $prof = $professorDao->searchById($horario['idProfessor'])['nome'];
-                              $sala = $salaDao->searchById($horario['idSala'])['nome'];
-                              echo '<tr role="row">';
-                              echo '  <td>'. $turma .'</td>';
-                              echo '  <td>'. $prof .'</td>';
-                              echo '  <td>'. $sala .'</td>';
-                              echo '</tr>';
-                            }
-                            
-                            if($contador > $limit) {
+                            if($contador >= $limit) {
                               echo '
                           </tbody>
                         </table>
@@ -227,6 +215,18 @@
                           </thead>
                           <tbody>';
                               $contador = 0;
+                            }
+
+                            if($tipoDao->searchById($horario['idTipo'])['nome'] == $tipo) {
+                              $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
+                              $prof = $professorDao->searchById($horario['idProfessor'])['nome'];
+                              $sala = $salaDao->searchById($horario['idSala'])['nome'];
+                              echo '<tr role="row">';
+                              echo '  <td>'. $turma .'</td>';
+                              echo '  <td>'. $prof .'</td>';
+                              echo '  <td>'. $sala .'</td>';
+                              echo '</tr>';
+                              $contador++;
                             }
                           }
                           echo '
