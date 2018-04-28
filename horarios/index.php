@@ -80,6 +80,29 @@
       $i++;
     }
     $tipos = array_unique($tipos);
+
+    function ordemTipo($tipos) {
+      $newTipos;
+      foreach ($tipos as $value) {
+        switch ($value) {
+          case 'TÉCNICO':
+            $newTipos[0] = $value;
+            break;
+          case 'APRENDIZAGEM':
+            $newTipos[1] = $value;
+            break;
+          case 'ENSINO MÉDIO':
+            $newTipos[2] = $value;
+            break;
+          default:
+            $newTipos[3] = $value;
+            break;
+        }
+      }
+      ksort($newTipos);
+      return $newTipos;
+    }
+    $tipos = ordemTipo($tipos);
     
     switch(count($tipos)) {
       case 1:
@@ -179,9 +202,9 @@
           }
           echo '
             <div class="' . $classeCol . '">
-              <div class="box box-info' . $classeBox . '">
+              <div class="box box-dark' . $classeBox . '">
                 <div class="box-header with-border">
-                  <h1 class="box-title"><span class="label label-warning">' . $tipo . '</span></h1>
+                  <h1 class="box-title">' . $tipo . '</h1>
                 </div>
                 <div id="slick'.$slick.'">
                   <div class="box-body">
@@ -189,9 +212,9 @@
                       <table class="table no-margin">
                         <thead>
                           <tr>
-                            <th class="col-sm-6"><span class="label label-info">Turma</span></th>
-                            <th class="col-sm-4"><span class="label label-info">Professor</span></th>
-                            <th class="col-sm-2"><span class="label label-info">Sala</span></th>
+                            <th class="col-sm-6">Turma</th>
+                            <th class="col-sm-4">Professor</th>
+                            <th class="col-sm-2">Sala</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -209,9 +232,9 @@
                         <table class="table no-margin">
                           <thead>
                             <tr>
-                              <th class="col-sm-6"><span class="label label-info">Turma</span></th>
-                              <th class="col-sm-4"><span class="label label-info">Professor</span></th>
-                              <th class="col-sm-2"><span class="label label-info">Sala</span></th>
+                              <th class="col-sm-6">Turma</th>
+                              <th class="col-sm-4">Professor</th>
+                              <th class="col-sm-2">Sala</th>
                             </tr>
                           </thead>
                           <tbody>';
@@ -254,9 +277,9 @@
       if($horarios == null) {
         echo '
           <div class="col-sm-12">
-            <div class="box box-info box-full">
-              <div class="box-header" style="text-align: center;">
-                <h1 class="box-title label label-warning" style="margin-top: 40vh;">Sem horários cadastrados!</h1>
+            <div class="box box-dark box-full">
+              <div class="box-body" style="text-align: center;">
+                <h1 class="sem-horarios" style="margin-top: 40vh;">Sem horários cadastrados!</h1>
               </div>
             </div>
           </div>

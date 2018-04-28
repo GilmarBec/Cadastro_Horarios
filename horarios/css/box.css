@@ -452,3 +452,81 @@
 .container-horarios .box .box-title {
   padding-bottom: 10px;
 }
+
+.box-dark {
+  border-top: 0px;
+  background-color: #002B30;
+}
+
+.box-dark .box-header {
+  background-color: #012326;
+  color: #C9E901;
+  text-align: center;
+}
+
+.box-dark .box-body .sem-horarios {
+  color: #C9E901;
+  font-size: 6em;
+}
+
+.box-dark table thead {
+  color: white;
+}
+
+.box-dark table tbody {
+  color: white;
+  font-size: 1.3em;
+}
+
+.box-dark table tbody tr:nth-child(odd) {
+  color: #C9E901;
+  background-color: #00434B;
+}
+
+.box-dark table tbody td, .box-dark table thead th {
+  border: 0;
+}
+
+.box-dark table tbody td:nth-child(2) {
+  font-size: 0.8em;
+  vertical-align: middle;
+}
+
+.box-light {
+  border-top: 0px;
+  background-color: white;
+}
+
+.box-light .box-header {
+  background-color: #B4B7B8;
+  color: black;
+  text-align: center;
+}
+
+.box-light .box-body .sem-horarios {
+  color: black;
+  font-size: 6em;
+}
+
+.box-light table thead {
+  color: black;
+}
+
+.box-light table tbody {
+  color: #003924;
+  font-size: 1.3em;
+}
+
+.box-light table tbody tr:nth-child(odd) {
+  color: black;
+  background-color: #E6E6E6;
+}
+
+.box-light table tbody td, .box-light table thead th {
+  border: 0;
+}
+
+.box-light table tbody td:nth-child(2) {
+  font-size: 0.8em;
+  vertical-align: middle;
+}
