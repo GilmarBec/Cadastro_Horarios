@@ -32,6 +32,14 @@
             <li<?php if($pageAtual == "importar") echo ' class="active"'; ?>><a href="/master/importar.php">Importações</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tema <span class="caret"></span></a>
+              <ul class="dropdown-menu" id="dropdown">
+                <li><a href="/master/settings/controller/tema.php?tema=1">Tema Dark</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/master/settings/controller/tema.php?tema=2">Tema Light</a></li>
+              </ul>
+            </li>
             <li<?php if($pageAtual == "settings") echo ' class="active"'; if($_SESSION['login'] != "admin") echo ' style=" display: none;"';?>><a href="/master/settings/">Settings</a></li>
             <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/sse/sseUpdate.php">Update</a></li>
             <li<?php if(!$logado) echo ' style=" display: none;"';?>><a href="/master/php/logoutControl.php">Logout</a></li>

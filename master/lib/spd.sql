@@ -1,6 +1,7 @@
 CREATE TABLE `alterar` (
   `id` int(11) NOT NULL,
-  `alteracao` varchar(255) NOT NULL
+  `alteracao` varchar(255) NOT NULL,
+  `tema` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

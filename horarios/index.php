@@ -13,6 +13,13 @@
   
   $alterarDao = new AlterarDao($conexao);
   
+  $tema = $alterarDao->getTema();
+  if($tema == 1) {
+    $tema = "box-dark";
+  } else if($tema == 2) {
+    $tema = "box-light";
+  }
+
   $atual = $alterarDao->select();
   echo '<script>var atual = "'.$atual["alteracao"].'"</script>';
   
@@ -202,7 +209,7 @@
           }
           echo '
             <div class="' . $classeCol . '">
-              <div class="box box-dark' . $classeBox . '">
+              <div class="box ' . $tema . $classeBox . '">
                 <div class="box-header with-border">
                   <h1 class="box-title">' . $tipo . '</h1>
                 </div>
@@ -277,7 +284,7 @@
       if($horarios == null) {
         echo '
           <div class="col-sm-12">
-            <div class="box box-dark box-full">
+            <div class="box ' . $tema . ' box-full">
               <div class="box-body" style="text-align: center;">
                 <h1 class="sem-horarios" style="margin-top: 40vh;">Sem horários cadastrados!</h1>
               </div>
