@@ -1,7 +1,7 @@
 <?php
   function navbar($pageAtual,$logado){
-    ?>
-    <nav class="row navbar navbar-default">
+?>
+    <nav class="row navbar navbar-dark">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">

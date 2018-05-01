@@ -15,11 +15,10 @@
     <?php navbar("home",$logado); ?>
     
     <div class="row gutter">
-        <div class="box box-info">
-        <div class="box-header">
-          <center><h1 class="box-title"><span class="label label-primary">Bem vindo ao Quadro de Horários!</span></h1></center>
+        <div class="box box-dark">
+        <div class="box-body">
+          <center><h1 class="sem-horarios">Bem vindo ao Quadro de Horários!</h1></center>
         </div>
-        <div class="box-body"></div>
       </div>
     </div>
   </div>
