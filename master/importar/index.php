@@ -19,6 +19,11 @@
 		.control-label {
 			line-height: 2.5;
 		}
+
+    .modal-backdrop {
+      border-radius: 5px;
+      margin-bottom: 9vh;
+    }
   </style>
 </head>
 
@@ -83,6 +88,9 @@
       </div>
     </div>
   </div>
+  <div class="modal">
+    <center><img src="944.gif"></center>
+  </div>
 </body>
 
 </html>
@@ -103,7 +111,10 @@
 
 	function validar(id, idForm) {
 		if($("#"+id).val().substr(-4) == ".csv") {
-      if(confirm("Realizar importação irá limpar os horários cadastrados!\nTem certeza que deseja fazer isso?")) $("#"+idForm).submit();
+      if(confirm("Realizar importação irá limpar os horários cadastrados!\nTem certeza que deseja fazer isso?")) {
+        $(".modal").modal({backdrop: "static"});
+        $("#"+idForm).submit();
+      }
 		} else if($("#"+id).val() == "") {
     } else alert("Formato não suportado!");
 	}
