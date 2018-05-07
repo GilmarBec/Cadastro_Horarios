@@ -49,16 +49,22 @@
 
 <head>
   <?php ativarHead(); ?>
+  <script type="text/javascript" src="../../js/jquery.mask.min.js"></script>
 </head>
 
 <body>
   <div class="container_fluid container-iframe">
     <div class="row">
       <div class="box box-info box-iframe">
-        <div class="box-header with-border">
-          <h3 class="box-title"><span class="label label-info">Cadastro de Horários</span></h3>
-        </div>
         <form class="form-horizontal" action="/master/cadastros/horarios/php/updateControl.php?id=<?php echo $id; ?>" method="POST">
+          <div class="box-header with-border">
+            <h3 class="col-sm-11 box-title">
+              <span class="label label-info">Cadastro de Horários</span>
+            </h3>
+            <h3 class="col-sm-1 box-title">
+              <label for="unico" style="margin: 0" id="btnUnico" class="btn btn-xs btn-success">Único</label><input id="unico" type="checkbox" name="unico" style="display: none;" value="true">
+            </h3>
+          </div>
           <div class="box-body" style="height: 74.5vh; overflow-y: scroll; overflow-x: hidden;">
             <div class="form-group">
               <label for="turno" class="col-sm-2 control-label">Turno</label>
@@ -108,12 +114,20 @@
               </div>
             </div>
             
-            <div class="form-group">
+            <div class="form-group form-group-dates">
               <label for="datepicker" class="col-sm-2 control-label">Datas</label>
 
               <div class="col-sm-10">
                 <input id="datas" type="hidden" name="datas" value="">
                 <div id="datepicker" style="background-color: #eceadf; border-radius: 5px; border: 1px solid #cbc7bd;"></div>
+              </div>
+            </div>
+            
+            <div class="form-group form-group-date hidden">
+              <label for="datepicker" class="col-sm-2 control-label">Data</label>
+
+              <div class="col-sm-10">
+                <input id="data" type="text" name="data" class="form-control">
               </div>
             </div>
           </div>
@@ -163,6 +177,34 @@
     $("#sala").val(sala);
     $("#tipo").val(tipo);
   }, 50);
+
+  $('#data').datepicker({
+    dateFormat: "dd/mm/yy",
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+  });
+
+  $('#data').mask('00/00/0000');
+  $('#unico').on('change', function() {
+    if($('#unico').prop('checked')) {
+      $('#btnUnico').removeClass('btn-success');
+      $('#btnUnico').addClass('btn-danger');
+
+      $('.form-group-dates').addClass('hidden');
+      $('.form-group-date').removeClass('hidden');
+    } else {
+      $('#btnUnico').removeClass('btn-danger');
+      $('#btnUnico').addClass('btn-success');
+
+      $('.form-group-dates').removeClass('hidden');
+      $('.form-group-date').addClass('hidden');
+    }
+  })
 </script>
 
 <?php

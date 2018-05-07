@@ -124,6 +124,19 @@
       }
     }
 
+    public function excludeByDate($id, $date){
+      try {
+        $array = array('id'=>$id, 'data'=>$date);
+        $sql = 'DELETE FROM registro WHERE idHorario=:id and data=:data';
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($array);
+        
+        return true;
+      } catch(PDOException $e) {
+        return $e->getMessage();
+      }
+    }
+
     public function clear(){
       try {
         $stmt = $this->con->prepare('DROP TABLE registro');

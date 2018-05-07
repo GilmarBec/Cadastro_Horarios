@@ -89,7 +89,7 @@
     </div>
   </div>
   <div class="modal">
-    <center><img src="944.gif"></center>
+    <center><img src="../img/loadScreen.gif"></center>
   </div>
 </body>
 
