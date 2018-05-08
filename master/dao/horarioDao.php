@@ -143,6 +143,25 @@
     
     public function update($horario){
       try {
+        $array = array("turno"=>$horario->getTurno(), "turma"=>$horario->getTurma(),"professor"=>$horario->getProfessor(),"sala"=>$horario->getSala(),"tipo"=>$horario->getTipo());
+        $stmt = $this->con->prepare('SELECT id FROM horario WHERE idTurma=:turma AND idProfessor=:professor AND idSala=:sala AND idTipo=:tipo AND turno=:turno');
+        $stmt->execute($array);
+        
+        $linha = null;
+        foreach($stmt as $row) {
+          $linha = $row;
+          if($linha['id'] != $horario->getId()) return false;
+          else return true;
+        }
+        
+        if($linha != null) {
+          return false;
+        }
+      } catch(PDOException $e) {
+        return $e->getMessage();
+      }
+
+      try {
         $array = array('id'=>$horario->getId(),'turno'=>$horario->getTurno(),'idTurma'=>$horario->getTurma(),'idProfessor'=>$horario->getProfessor(),'idSala'=>$horario->getSala(),'idTipo'=>$horario->getTipo());
         $sql = 'UPDATE horario SET idProfessor=:idProfessor, idSala=:idSala, idTipo=:idTipo, idTurma=:idTurma, turno=:turno WHERE id=:id';
         $stmt = $this->con->prepare($sql);
