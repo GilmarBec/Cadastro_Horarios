@@ -143,5 +143,26 @@
         return null;
       }
     }
+
+    function clear(){
+      try {
+        //Drop table 'sala'
+        $stmt = $this->con->prepare('DROP TABLE sala');
+        $stmt->execute();
+
+        //Create table 'sala'
+        $sql = "
+          CREATE TABLE IF NOT EXISTS `sala` (
+            `id` int(11) AUTO_INCREMENT,
+            `nome` varchar(255) NOT NULL,
+            PRIMARY KEY (`id`)
+          );
+        ";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+      } catch(PDOException $e) {
+        echo 'ERRO: ' . $e->getMessage();
+      }
+    }
   }
 ?>

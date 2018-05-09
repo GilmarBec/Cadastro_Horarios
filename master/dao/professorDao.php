@@ -128,21 +128,42 @@
     }
     
     function searchById($id){
-    try{
-      $array = array('id'=>$id);
-      $sql = 'SELECT nome FROM professor WHERE id=:id';
-      $stmt = $this->con->prepare($sql);
-      $stmt->execute($array);
-      
-      $linha = null;
-      foreach($stmt as $row) {
-        $linha = $row;
+      try{
+        $array = array('id'=>$id);
+        $sql = 'SELECT nome FROM professor WHERE id=:id';
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute($array);
+        
+        $linha = null;
+        foreach($stmt as $row) {
+          $linha = $row;
+        }
+        
+        return $linha;
+      } catch(PDOException $e) {
+        return null;
       }
-      
-      return $linha;
-    } catch(PDOException $e) {
-      return null;
     }
-  }
+
+    function clear(){
+      try {
+        //Drop table 'professor'
+        $stmt = $this->con->prepare('DROP TABLE professor');
+        $stmt->execute();
+
+        //Create table 'professor'
+        $sql = "
+          CREATE TABLE IF NOT EXISTS `professor` (
+            `id` int(11) AUTO_INCREMENT,
+            `nome` varchar(255) NOT NULL,
+            PRIMARY KEY (`id`)
+          );
+        ";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+      } catch(PDOException $e) {
+        echo 'ERRO: ' . $e->getMessage();
+      }
+    }
   }
 ?>

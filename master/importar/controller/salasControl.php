@@ -50,25 +50,9 @@
 	$salas = array_unique($salas);
 	asort($salas);
 	
-	$horarioDao->clear();
-	$registroDao->clear();
-	
-	try {
-	  $stmt = $conexao->getCon()->prepare('DROP TABLE sala');
-	  $stmt->execute();
-
-	  $sql = "
-	    CREATE TABLE IF NOT EXISTS `sala` (
-			  `id` int(11) AUTO_INCREMENT,
-			  `nome` varchar(255) NOT NULL,
-			  PRIMARY KEY (`id`)
-			);
-		";
-	  $stmt = $conexao->getCon()->prepare($sql);
-	  $stmt->execute();
-	} catch(PDOException $e) {
-	  echo 'ERRO: ' . $e->getMessage();
-	}
+	$horarioDao->clear(); 	//Limpa a tabela horarios
+	$registroDao->clear(); 	//Limpa a tabela Registro
+	$salaDao->clear(); 		//Limpa a tabela Sala
 
 	foreach ($salas as $result) {
 		$sala = new Sala();

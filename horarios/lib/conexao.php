@@ -3,8 +3,8 @@
         private $host = "localhost";
         private $db = "spd";
         private $user = "root";
-        private $pass = "root";
-        // private $pass = "";
+        //private $pass = "root";
+        private $pass = "";
         
         private $con;
         

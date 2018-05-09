@@ -142,7 +142,7 @@
         $stmt = $this->con->prepare('DROP TABLE registro');
         $stmt->execute();
 
-        //Create Table Registro And Your Foreign Key
+        //Create Table Registro And Yours Foreign Key
         $sql = "
           CREATE TABLE `registro` (
             `id` bigint(20) AUTO_INCREMENT,

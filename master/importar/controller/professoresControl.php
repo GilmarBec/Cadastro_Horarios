@@ -42,25 +42,9 @@
 	$professores = array_unique($professores);
 	asort($professores);
 	
-	$horarioDao->clear();
-	$registroDao->clear();
-	
-	try {
-    $stmt = $conexao->getCon()->prepare('DROP TABLE professor');
-    $stmt->execute();
-
-    $sql = "
-	    CREATE TABLE IF NOT EXISTS `professor` (
-			  `id` int(11) AUTO_INCREMENT,
-			  `nome` varchar(255) NOT NULL,
-			  PRIMARY KEY (`id`)
-			);
-		";
-    $stmt = $conexao->getCon()->prepare($sql);
-    $stmt->execute();
-  } catch(PDOException $e) {
-    echo 'ERRO: ' . $e->getMessage();
-  }
+	$horarioDao->clear();	//Limpa a tabela horario 
+	$registroDao->clear();	//Limpa a tabela registro
+	$professorDao->clear();	//Limpa a tabela professor
 
 	foreach ($professores as $result) {
 		$professor = new Professor();

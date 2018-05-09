@@ -43,26 +43,9 @@
 		$turmas[$i]['turno'] = $linha[1];
 	}
 	
-	$horarioDao->clear();
-	$registroDao->clear();
-	
-	try {
-	  $stmt = $conexao->getCon()->prepare('DROP TABLE turma');
-	  $stmt->execute();
-
-	  $sql = "
-	    CREATE TABLE IF NOT EXISTS `turma` (
-			  `id` int(11) AUTO_INCREMENT,
-			  `nome` varchar(255) NOT NULL,
-			  `turno` varchar(15) NOT NULL,
-			  PRIMARY KEY (`id`)
-			);
-		";
-	  $stmt = $conexao->getCon()->prepare($sql);
-	  $stmt->execute();
-	} catch(PDOException $e) {
-	  echo 'ERRO: ' . $e->getMessage();
-	}
+	$horarioDao->clear();	//Limpa a tabela 'horarios'
+	$registroDao->clear();	//Limpa a tabela 'registro'
+	$turmaDao->clear();		//Limpa a tabela 'turma'
 
 	foreach ($turmas as $result) {
 		$turma = new Turma();
