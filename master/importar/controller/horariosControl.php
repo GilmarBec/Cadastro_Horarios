@@ -99,8 +99,8 @@
 		$tipoDao->insert($tipo);
 		$tipo->setId($tipoDao->search($tipo)[0]['id']);
 
-		$codTurma = $linha[1]; // Código da turma (Ex.: T TINF 2018/1 N1)
-		$nomeTurma = $linha[6]; // Nome da turma (Ex.: Técnico em Informática)
+		$codTurma = $value[1]; // Código da turma (Ex.: T TINF 2018/1 N1)
+		$nomeTurma = $value[6]; // Nome da turma (Ex.: Técnico em Informática)
 
 		if(explode(" ", $nomeTurma)[0] == "Aprendizagem") { // Remove um dos tipos do prefixo de Aprendizagem Industrial
 			$turmaTemp = substr($nomeTurma, 27) . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
