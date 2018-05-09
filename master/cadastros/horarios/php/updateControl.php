@@ -64,6 +64,7 @@
     
     $result = $horarioDao->update($horario);
     
+    $final = false;
     if($result === true) {
       $final = $registroDao->update($horario->getId(), $dates);
     }

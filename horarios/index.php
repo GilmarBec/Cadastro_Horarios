@@ -115,22 +115,18 @@
       case 1:
         $classeBox = " box-full";
         $classeCol = "col-sm-12";
-        $limit = 16;
         break;
       case 2:
         $classeBox = " box-full";
         $classeCol = "col-sm-6";
-        $limit = 16;
         break;
       case 3:
         $classeBox = " box-full";
         $classeCol = "col-sm-4";
-        $limit = 16;
         break;
       case 4:
         $classeBox = " box-full";
         $classeCol = "col-sm-4";
-        $limit = 16;
         break;
     }
   }
@@ -198,6 +194,7 @@
       if($horarios != null) {
         $i = 0;
         $slick = 0;
+        $limit = 16;
         foreach ($tipos as $tipo) {
           $slick++;
           if(count($tipos) == 4) {
@@ -219,9 +216,9 @@
                       <table class="table no-margin">
                         <thead>
                           <tr>
-                            <th class="col-sm-6">Turma</th>
-                            <th class="col-sm-4">Professor</th>
-                            <th class="col-sm-2">Sala</th>
+                            <th class="col-sm">Turma</th>
+                            <th class="col-sm">Prof.</th>
+                            <th class="col-sm">Sala</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -239,9 +236,9 @@
                         <table class="table no-margin">
                           <thead>
                             <tr>
-                              <th class="col-sm-6">Turma</th>
-                              <th class="col-sm-4">Professor</th>
-                              <th class="col-sm-2">Sala</th>
+                              <th class="col-sm">Turma</th>
+                              <th class="col-sm">Profº</th>
+                              <th class="col-sm">Sala</th>
                             </tr>
                           </thead>
                           <tbody>';
@@ -251,6 +248,7 @@
                             if($tipoDao->searchById($horario['idTipo'])['nome'] == $tipo) {
                               $turma = $turmaDao->searchById($horario['idTurma'])['nome'];
                               $prof = $professorDao->searchById($horario['idProfessor'])['nome'];
+                              if(count(explode(" ", $prof)) > 1) $prof = explode(" ", $prof)[0] . " " . substr(explode(" ", $prof)[1], 0, 1);
                               $sala = $salaDao->searchById($horario['idSala'])['nome'];
                               echo '<tr role="row">';
                               echo '  <td>'. $turma .'</td>';

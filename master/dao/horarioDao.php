@@ -160,7 +160,7 @@
       } catch(PDOException $e) {
         return $e->getMessage();
       }
-
+      
       try {
         $array = array('id'=>$horario->getId(),'turno'=>$horario->getTurno(),'idTurma'=>$horario->getTurma(),'idProfessor'=>$horario->getProfessor(),'idSala'=>$horario->getSala(),'idTipo'=>$horario->getTipo());
         $sql = 'UPDATE horario SET idProfessor=:idProfessor, idSala=:idSala, idTipo=:idTipo, idTurma=:idTurma, turno=:turno WHERE id=:id';

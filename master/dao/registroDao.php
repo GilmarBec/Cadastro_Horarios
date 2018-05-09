@@ -35,7 +35,7 @@
     
     public function select(){
       try {
-        $stmt = $this->con->prepare('SELECT * FROM registro');
+        $stmt = $this->con->prepare('SELECT * FROM registro ORDER BY id DESC');
         $stmt->execute();
         
         $i = 0;
@@ -58,7 +58,7 @@
     public function search($data){
       try {
         $array = array("data"=>$data);
-        $stmt = $this->con->prepare('SELECT idHorario FROM registro WHERE data=:data');
+        $stmt = $this->con->prepare('SELECT idHorario FROM registro WHERE data=:data ORDER BY id DESC');
         $stmt->execute($array);
         
         $i = 0;

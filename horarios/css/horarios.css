@@ -30,3 +30,13 @@ table th {
 table th span {
 	border-radius: 5px 5px 0px 0px !important;
 }
+
+.container-horarios .col-sm-4 .box table tbody tr {
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.container-horarios .col-sm-4 .box table tbody td:nth-child(2) {
+  font-size: 0.9em;
+  vertical-align: middle;
+}
