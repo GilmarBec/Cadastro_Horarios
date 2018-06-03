@@ -5,7 +5,9 @@ CREATE TABLE `db` (
 
 ALTER TABLE `db`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nome` (`nome`);
+  ADD UNIQUE KEY `nome` (`nome`),
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,

@@ -60,18 +60,30 @@ class Unidades {
 	}
 
 	public function insert($unidade) {
-		$array = array('unidade'=>utf8_decode($unidade));
-		$sql = "INSERT INTO spd.db (nome) VALUES (?);";
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->execute($array);
+		try{
+			$array = array('unidade'=>utf8_decode($unidade));
+			$sql = "INSERT INTO spd.db (nome) VALUES (:unidade);";
+			$stmt = $this->conexao->prepare($sql);
+			$stmt->execute($array);
+		} catch(PDOException $e) {
+			echo '<br>Erro: ' . $e;
+		}
 
-		$sql = "CREATE DATABASE IF NOT EXISTS spd_" . $this->clear($unidade);
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->execute();
+		try{
+			$sql = "CREATE DATABASE IF NOT EXISTS spd_" . $this->clear($unidade);
+			$stmt = $this->conexao->prepare($sql);
+			$stmt->execute();
+		} catch(PDOException $e) {
+			echo '<br>Erro: ' . $e;
+		}
 
-		$sql = 'USE spd_' . $this->clear($unidade) . ';';
-		$sql .= file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/master/lib/spdUnidades.sql');
-		$stmt = $this->conexao->prepare($sql);
-		$stmt->execute();
+		try{
+			$sql = 'USE spd_' . $this->clear($unidade) . ';';
+			$sql .= file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/master/lib/spdUnidades.sql');
+			$stmt = $this->conexao->prepare($sql);
+			$stmt->execute();
+		} catch(PDOException $e) {
+			echo '<br>Erro: ' . $e;
+		}
 	}
 }

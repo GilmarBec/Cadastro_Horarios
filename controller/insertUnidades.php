@@ -4,13 +4,9 @@
 	$Unidades = new Unidades();
 
 	if(ISSET($_POST['unidade']) and $_POST['unidade'] != "") {
-		try{
-			$Unidades->insert($_POST['unidade']);
+		$Unidades->insert($_POST['unidade']);
 
-			Header('Location: ../');
-		} catch(PDOException $e) {
-			echo 'Erro: ' . $e;
-		}
+		Header('Location: ../');
 	} else if(ISSET($_POST['unidade']) and $_POST['unidade'] == "") {
 		Header('Location: ../');
 	} else {
