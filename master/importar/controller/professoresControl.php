@@ -10,8 +10,10 @@
 	$alterarDao = new AlterarDao($conexao);
 	$horarioDao = new HorarioDao($conexao);
 	$registroDao = new RegistroDao($conexao);
-	$professorDao = new ProfessorDao($conexao);
+	$professorDao = new professorDao($conexao);
 
+	set_time_limit(0);
+	
 	$file = $_FILES['file'];
 	$f = fopen($file['tmp_name'], "r");
 	$csv = array_map('str_getcsv', file($file['tmp_name']));

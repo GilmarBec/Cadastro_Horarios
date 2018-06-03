@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Primeiro Acesso</title>
+
+	<!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- jQuery -->
+	<script type="text/javascript" src="../dist/jquery/jquery-3.3.1.min.js"></script>
+
+	<!-- Bootstrap -->
+  <script type="text/javascript" src="../dist/bootstrap/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../dist/bootstrap/bootstrap.min.css">
+
+  <!-- AngularJS -->
+	<script type="text/javascript" src="../dist/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="../dist/angularjs/angular-route.min.js"></script>
+
+	<!-- Scripts Angular -->
+	<script type="text/javascript" src="../dist/controller.js"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../dist/root.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="card p-3 py-5 t-10 bg-dark text-success">
+					<div class="card-head">
+						<h1 class="text-center">Primeiro Acesso</h1>
+						<h3 class="text-center">Configuração do Banco de Dados</h3>
+					</div>
+
+					<div class="card-body">
+						<form autocomplete="off" method="post" action="../controller/primeiroAcesso.php">
+							<div class="row">
+								<div class="col-sm-3 col-12">
+									<label for="host">Nome do Host:</label>
+								</div>
+								<div class="col-sm-9 col-12">
+									<input id="host" class="form-control" type="text" name="host" placeholder="Ex.: localhost, 123.0.0.1">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3 col-12">
+									<label for="username">Nome de Usuário:</label>
+								</div>
+								<div class="col-sm-9 col-12">
+									<input id="username" class="form-control" type="text" name="username" placeholder="Ex.: root">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3 col-12">
+									<label for="pass">Senha de Usuário:</label>
+								</div>
+								<div class="col-sm-9 col-12">
+									<input id="pass" class="form-control" type="password" name="pass" placeholder="Ex.: root">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-3 col-12">
+									<label for="unidade">Nome da Primeira Unidade:</label>
+								</div>
+								<div class="col-sm-9 col-12">
+									<input id="unidade" class="form-control" type="text" name="unidade" placeholder="Ex.: São José">
+								</div>
+							</div>
+							<div class="row">
+								<div class="offset-sm-3 col-sm-9 col-12 text-center">
+									<button type="submit" class="btn btn-success btn-block">Confirmar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

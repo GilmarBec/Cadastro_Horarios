@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if(!isset($_SESSION['unidade'])) {
+    Header('Location: selectUnidade.php');
+  }
+
   include_once("lib/conexao.php");
   
   include_once("dao/alterarDao.php");

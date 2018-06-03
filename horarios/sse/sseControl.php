@@ -5,6 +5,7 @@
   include_once('../lib/conexao.php');
   include_once('../dao/alterarDao.php');
   
+  session_start();
   $conexao = new Conexao();
   $alterarDao = new AlterarDao($conexao);
   

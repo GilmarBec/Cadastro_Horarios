@@ -42,7 +42,6 @@
 		if(count($row) == 8 && $row[7] != "-") {
 			$values[$cont][0] = $row[3];
 			$values[$cont][1] = $row[6];
-			$values[$cont][6] = $row[5];
 			$cont--;
 		} else if(count($row) == 16 && $row[9] != "-") {
 			$values[$cont][2] = $row[2];
@@ -60,8 +59,6 @@
 			else if(substr($row[17], -3) == "RIO") $values[$cont][5] = substr($row[17], -10);
 			else if(substr($row[17], -3) == "EP)") $values[$cont][5] = substr($row[17], -9, -6);
 			else $values[$cont][5] = substr($row[17], -3);
-
-			$values[$cont][6] = $row[5];
 		} else $cont--;
 		$cont++;
 	}
@@ -72,7 +69,6 @@
 	// 3 = Data
 	// 4 = Professor
 	// 5 = Sala
-	// 6 = Nome da Turma
 
 	$horarioDao->clear();
 	$registroDao->clear();
@@ -96,26 +92,12 @@
 				$tipo->setNome('CURTA DURAÇÃO / EVENTOS');
 				break;
 		}
+
 		$tipoDao->insert($tipo);
 		$tipo->setId($tipoDao->search($tipo)[0]['id']);
 
-		$codTurma = $value[1]; // Código da turma (Ex.: T TINF 2018/1 N1)
-		$nomeTurma = $value[6]; // Nome da turma (Ex.: Técnico em Informática)
-
-		if(explode(" ", $nomeTurma)[0] == "Aprendizagem") { // Remove um dos tipos do prefixo de Aprendizagem Industrial
-			$turmaTemp = substr($nomeTurma, 27) . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
-		} else if(explode(" ", $nomeTurma)[0] == "Técnico" && explode(" ", $nomeTurma)[1] == "em") { // Remove o prefixo dos Técnicos
-			$turmaTemp = substr($nomeTurma, 11) . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
-		} else if(count(explode(" ", $nomeTurma)) >= 4 && explode(" ", $nomeTurma)[2] == "SENAI" && explode(" ", $nomeTurma)[3] == "Conecte") { // Remove o prefixo de Senai Conecte
-			$turmaTemp = substr($nomeTurma, 13) . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
-		} else if(explode(" ", $nomeTurma)[0] == "Programa" && explode(" ", $nomeTurma)[2] == "Aprendizagem") { // Remove o segundo tipo de prefixo de Aprendizagem Industrial
-			$turmaTemp = substr($nomeTurma, 39) . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
-		} else { // Pega todos os dados que sobraram sem filtrar
-			$turmaTemp = $nomeTurma . " " . explode(" ", $codTurma)[2] . " - " . explode("/", explode(" ", $codTurma)[2])[1];
-		}
-
 		$turma = new Turma();
-		$turma->setNome($turmaTemp);
+		$turma->setNome($value[1]);
 		$turma->setTurno($value[2]);
 		$turmaDao->insert($turma);
 		$turma->setId($turmaDao->search($turma)[0]['id']);
