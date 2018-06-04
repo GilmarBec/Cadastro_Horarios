@@ -19,6 +19,11 @@
 
 <head>
   <title>Login</title>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <script type="text/javascript" src="../dist/bootstrap/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../dist/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="../dist/root.css">
@@ -37,13 +42,15 @@
           <div class="card-body">
     			  <form action="php/loginControl.php" method="POST">
     				  <input class="form-control" type="text" name="login" placeholder="Login">
+
     				  <input class="form-control" type="password" name="senha" placeholder="Senha">
+              
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-6">
                   <button class="btn btn-danger btn-block" type="button" onclick="window.location = 'php/logoutControl.php'">Voltar</button>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-6">
       				    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 </div>
               </div>

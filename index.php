@@ -55,15 +55,18 @@
 				<div class="card-head">
 					<h1 class="text-center">Selecione a Unidade</h1>
 				</div>
+
 				<div class="card-body py-5">
 					<form method="post" action="">
 						<select class="form-control" type="text" name="unidade">
 							<option ng-repeat="unidade in unidades">{{unidade}}</option>
 						</select>
+
 						<div class="row">
 							<div class="col-6">
 								<a class="btn btn-primary btn-block" href="controller/insertUnidades.php">Criar nova</a>
 							</div>
+							
 							<div class="col-6">
 								<button type="submit" class="btn btn-success btn-block">Confirmar</button>
 							</div>

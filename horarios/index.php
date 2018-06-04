@@ -1,7 +1,9 @@
 <?php
   session_start();
-  if(!isset($_SESSION['unidade'])) {
+  if(!isset($_COOKIE['unidade'])) {
     Header('Location: selectUnidade.php');
+  } else {
+    setcookie('unidade', $_COOKIE['unidade'], time() + (86400 * 30), "/");
   }
 
   include_once("lib/conexao.php");

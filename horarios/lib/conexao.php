@@ -9,7 +9,7 @@
 		private $con;
 		
 		public function Conexao() {
-			$this->db = $_SESSION['unidade'];
+			$this->db = $_COOKIE['unidade'];
 			$this->con = new PDO("mysql:host=". $this->host . ";dbname=" . $this->db,$this->user,$this->pass) or print (mysql_error());
 			$this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}

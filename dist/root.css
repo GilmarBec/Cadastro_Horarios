@@ -54,6 +54,14 @@ table tbody tr:last-child {
 	padding: 0px !important;
 }
 
+.t-10 {
+	margin-top: 50px;
+}
+
+.t-5 {
+	margin-top: 25px;
+}
+
 @media(min-width: 720px) {
 	.t-10 {
 		margin-top: 100px;
